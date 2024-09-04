@@ -9,11 +9,57 @@
             background-color: #8533f1;
             font-family: Arial, sans-serif;
             margin: 0;
-            overflow: auto;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+        }
+
+        #loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #8533f1;
+            z-index: 9999;
+        }
+
+        #loading-screen img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #loading-screen h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        #loading-screen p {
+            font-size: 1.2rem;
+        }
+
+        #main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
             justify-content: flex-start;
+            background-color: #8533f1;
+            color: white;
+            width: 100%;
+            height: auto;
+            min-height: 100vh;
+            overflow: auto;
+            padding-top: 20px;
         }
 
         .animation-container {
@@ -145,7 +191,6 @@
             font-size: 14px;
         }
 
-        /* Estilos adicionais para modais de PIN */
         .modal {
             display: none;
             flex-direction: column;
@@ -199,100 +244,135 @@
     </style>
 </head>
 <body>
-    <div class="offline-message" id="offline-message">
-        <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem não estar disponíveis enquanto você estiver offline.</div>
-        <button onclick="closeOfflineMessage()">OK</button>
+    <div id="loading-screen">
+        <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone de Carregamento">
+        <h1>StudyTask</h1>
+        <p>Carregando...</p>
     </div>
 
-    <div class="online-message" id="online-message">
-        <div class="message-content">Você agora está online no app.</div>
-    </div>
-
-    <div class="slow-connection-message" id="slow-connection-message">
-        <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar lentamente.</div>
-    </div>
-    
-    <div class="animation-container">
-        <iframe src="https://luanzinh0fc.github.io/Vamos-de-StudyTask/" frameborder="0"></iframe>
-    </div>
-
-    <div class="button-container">
-        <a href="#" class="button" id="portugues-btn">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" alt="Português">
-        </a>
-        <a href="#" class="button hidden" id="redacao-btn">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg" alt="Redação de Português">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/ingl%C3%AAs-3-bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg" alt="Inglês">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/matem%C3%A1tica-3bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg" alt="Matemática">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-da-natureza-3bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg" alt="Ciências da Natureza">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-humanas-3bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg" alt="Ciências Humanas">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/educa%C3%A7%C3%A3o-f%C3%ADsica-3bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg" alt="Educação Física">
-        </a>
-        <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre" class="button">
-            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg" alt="Qualificação Profissional">
-        </a>
-    </div>
-
-    <div class="notification" id="notification">Olá Aluno, por favor toque novamente para acessar a atividade.</div>
-
-    <div id="pin-setup-modal" class="modal">
-        <div class="message-content">
-            Deseja configurar um PIN para o aplicativo?
+    <div id="main-content">
+        <div class="offline-message" id="offline-message">
+            <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem não estar disponíveis enquanto você estiver offline.</div>
+            <button onclick="closeOfflineMessage()">OK</button>
         </div>
-        <button onclick="startPinSetup(true)">Sim</button>
-        <button onclick="startPinSetup(false)">Não</button>
-    </div>
 
-    <div id="pin-create-modal" class="modal">
-        <div class="message-content">
-            Defina seu PIN de 4 dígitos:
-            <input type="password" id="pin-create-input" maxlength="4" inputmode="numeric">
-            <button onclick="askToSavePin()">Salvar PIN</button>
+        <div class="online-message" id="online-message">
+            <div class="message-content">Você agora está online no app.</div>
         </div>
-    </div>
 
-    <div id="pin-save-modal" class="modal">
-        <div class="message-content">
-            Deseja salvar o PIN na memória?
+        <div class="slow-connection-message" id="slow-connection-message">
+            <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar lentamente.</div>
         </div>
-        <button onclick="savePin(true)">Sim</button>
-        <button onclick="savePin(false)">Não</button>
-    </div>
-
-    <div id="pin-frequency-modal" class="modal">
-        <div class="message-content">
-            Selecione a frequência para solicitar o PIN:
-            <select id="pin-frequency">
-                <option value="60">Toda hora</option>
-                <option value="15">A cada 15 minutos</option>
-                <option value="10">A cada 10 minutos</option>
-                <option value="1440">A cada 24 horas</option>
-            </select>
-            <button onclick="savePinFrequency()">Salvar</button>
+        
+        <div class="animation-container">
+            <!-- Verifique se o link está correto e acessível -->
+            <iframe src="https://luanzinh0fc.github.io/Vamos-de-StudyTask/" frameborder="0"></iframe>
         </div>
-    </div>
 
-    <div id="pin-entry-modal" class="modal">
-        <div class="message-content">
-            Digite seu PIN:
-            <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
-            <button onclick="verifyPin()">Entrar</button>
-            <button onclick="recoverPin()">Recuperar PIN</button>
+        <div class="button-container">
+            <a href="#" class="button" id="portugues-btn">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" alt="Português">
+            </a>
+            <a href="#" class="button hidden" id="redacao-btn">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg" alt="Redação de Português">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/ingl%C3%AAs-3-bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg" alt="Inglês">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/matem%C3%A1tica-3bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg" alt="Matemática">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-da-natureza-3bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg" alt="Ciências da Natureza">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-humanas-3bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg" alt="Ciências Humanas">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/educa%C3%A7%C3%A3o-f%C3%ADsica-3bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg" alt="Educação Física">
+            </a>
+            <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre" class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg" alt="Qualificação Profissional">
+            </a>
+        </div>
+
+        <div class="notification" id="notification">Olá Aluno, por favor toque novamente para acessar a atividade.</div>
+
+        <div id="pin-setup-modal" class="modal">
+            <div class="message-content">
+                Deseja configurar um PIN para o aplicativo?
+            </div>
+            <button onclick="startPinSetup(true)">Sim</button>
+            <button onclick="startPinSetup(false)">Não</button>
+        </div>
+
+        <div id="pin-create-modal" class="modal">
+            <div class="message-content">
+                Defina seu PIN de 4 dígitos:
+                <input type="password" id="pin-create-input" maxlength="4" inputmode="numeric">
+                <button onclick="askToSavePin()">Salvar PIN</button>
+            </div>
+        </div>
+
+        <div id="pin-save-modal" class="modal">
+            <div class="message-content">
+                Deseja salvar o PIN na memória?
+            </div>
+            <button onclick="savePin(true)">Sim</button>
+            <button onclick="savePin(false)">Não</button>
+        </div>
+
+        <div id="pin-frequency-modal" class="modal">
+            <div class="message-content">
+                Selecione a frequência para solicitar o PIN:
+                <select id="pin-frequency">
+                    <option value="60">Toda hora</option>
+                    <option value="15">A cada 15 minutos</option>
+                    <option value="10">A cada 10 minutos</option>
+                    <option value="1440">A cada 24 horas</option>
+                </select>
+                <button onclick="savePinFrequency()">Salvar</button>
+            </div>
+        </div>
+
+        <div id="pin-entry-modal" class="modal">
+            <div class="message-content">
+                Digite seu PIN:
+                <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
+                <button onclick="verifyPin()">Entrar</button>
+                <button onclick="recoverPin()">Recuperar PIN</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // PIN Setup Logic
+        function showMainContent() {
+            document.body.style.overflow = 'auto';
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+        }
+
+        window.onload = function() {
+            let loadingTime = 2000;
+
+            if (navigator.connection) {
+                const connectionType = navigator.connection.effectiveType;
+                if (connectionType === '2g' || connectionType === 'slow-2g') {
+                    loadingTime = 5000;
+                }
+            }
+
+            setTimeout(() => {
+                showMainContent();
+                const pinSetupComplete = localStorage.getItem('pinSetupComplete');
+                if (!pinSetupComplete) {
+                    document.getElementById('pin-setup-modal').classList.add('active');
+                } else {
+                    checkPinEntry();
+                }
+            }, loadingTime);
+        };
+
         function startPinSetup(confirm) {
             const pinSetupModal = document.getElementById('pin-setup-modal');
             if (confirm) {
@@ -340,12 +420,24 @@
         function verifyPin() {
             const enteredPin = document.getElementById('pin-entry-input').value;
             const storedPin = localStorage.getItem('userPin');
+            let attempts = parseInt(localStorage.getItem('pinAttempts') || '0');
+
+            if (attempts >= 3) {
+                alert("Acesso bloqueado. Por favor, recupere seu PIN.");
+                document.getElementById('pin-entry-input').style.display = 'none';
+                document.querySelector("#pin-entry-modal button:not(:last-child)").style.display = 'none';
+                return;
+            }
+
             if (enteredPin === storedPin) {
                 alert("Acesso concedido!");
                 document.getElementById('pin-entry-modal').classList.remove('active');
                 localStorage.setItem('lastPinCheck', new Date().getTime());
+                localStorage.setItem('pinAttempts', '0'); // Reset attempts on success
             } else {
-                alert("PIN incorreto. Tente novamente.");
+                attempts++;
+                localStorage.setItem('pinAttempts', attempts.toString());
+                alert(`PIN incorreto. Tentativas restantes: ${3 - attempts}`);
             }
         }
 
@@ -363,27 +455,17 @@
             const pinSetupComplete = localStorage.getItem('pinSetupComplete');
             const userPin = localStorage.getItem('userPin');
             const lastPinCheck = localStorage.getItem('lastPinCheck');
-            const pinFrequency = localStorage.getItem('pinFrequency') || 60; // Default to every hour
+            const pinFrequency = localStorage.getItem('pinFrequency') || 60;
 
             if (pinSetupComplete === 'yes' && userPin) {
                 const now = new Date().getTime();
-                const elapsedTime = (now - lastPinCheck) / (1000 * 60); // in minutes
+                const elapsedTime = (now - lastPinCheck) / (1000 * 60);
                 if (elapsedTime > pinFrequency) {
                     document.getElementById('pin-entry-modal').classList.add('active');
                 }
             }
         }
 
-        window.onload = function() {
-            const pinSetupComplete = localStorage.getItem('pinSetupComplete');
-            if (pinSetupComplete !== 'no') {
-                document.getElementById('pin-setup-modal').classList.add('active');
-            } else {
-                checkPinEntry();
-            }
-        };
-
-        // Existing Code
         let portuguesClickCount = 0;
 
         document.getElementById('portugues-btn').addEventListener('click', function(event) {
@@ -411,14 +493,12 @@
             window.location.href = "https://sites.google.com/view/cpiadestudytask/reda%C3%A7%C3%B5es-3bimestre";
         });
 
-        // Desabilita o menu de contexto do botão
         document.querySelectorAll('.button').forEach(button => {
             button.addEventListener('contextmenu', event => {
                 event.preventDefault();
             });
         });
 
-        // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js').then(registration => {
@@ -429,7 +509,6 @@
             });
         }
 
-        // Check connection status
         function updateOnlineStatus() {
             const offlineMessage = document.getElementById('offline-message');
             const onlineMessage = document.getElementById('online-message');
@@ -449,7 +528,6 @@
                     }, 2000);
                 }
 
-                // Check for slow connection
                 if (navigator.connection) {
                     const { effectiveType } = navigator.connection;
                     if ((effectiveType === '2g' || effectiveType === 'slow-2g') && !hasShownSlowConnectionMessage) {
@@ -474,4 +552,4 @@
         updateOnlineStatus();
     </script>
 </body>
-</html>
+    </html>
