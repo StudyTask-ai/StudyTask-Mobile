@@ -42,7 +42,7 @@
             margin: 0;
             font-size: 2rem;
             text-align: center;
-            color: yellow; /* Cor do texto em amarelo */
+            color: yellow;
         }
 
         #loading-screen p {
@@ -233,18 +233,32 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        #blurred-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 50;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div id="loading-screen">
         <div class="icon-container">
             <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone de Carregamento">
-            <h1>StudyTask</h1> <!-- Texto em amarelo abaixo do ícone -->
+            <h1>StudyTask</h1>
         </div>
         <p>Carregando...</p>
     </div>
 
     <div id="main-content">
+        <div id="blurred-background"></div>
+
         <div class="offline-message" id="offline-message">
             <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem não estar disponíveis enquanto você estiver offline.</div>
             <button onclick="closeOfflineMessage()">OK</button>
@@ -341,6 +355,14 @@
             document.getElementById('main-content').style.display = 'flex';
         }
 
+        function showBlurredBackground() {
+            document.getElementById('blurred-background').style.display = 'block';
+        }
+
+        function hideBlurredBackground() {
+            document.getElementById('blurred-background').style.display = 'none';
+        }
+
         window.onload = function() {
             let loadingTime = 2000;
 
@@ -421,6 +443,7 @@
             if (enteredPin === storedPin) {
                 alert("Acesso concedido!");
                 document.getElementById('pin-entry-modal').classList.remove('active');
+                hideBlurredBackground();
                 localStorage.setItem('lastPinCheck', new Date().getTime());
                 localStorage.setItem('pinAttempts', '0');
             } else {
@@ -451,6 +474,7 @@
                 const elapsedTime = (now - lastPinCheck) / (1000 * 60);
                 if (elapsedTime > pinFrequency) {
                     document.getElementById('pin-entry-modal').classList.add('active');
+                    showBlurredBackground();
                 }
             }
         }
