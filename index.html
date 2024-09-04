@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTask</title>
+    <style>
+        body {
+            background-color: #8533f1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .animation-container {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .animation-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .button {
+            display: block;
+            border: none;
+            border-radius: 12px;
+            padding: 0;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: none;
+            transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+            margin-bottom: 10px;
+            opacity: 1;
+            width: 100%;
+            max-width: 400px;
+            background: none;
+        }
+
+        .button img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button.hidden {
+            display: none;
+        }
+
+        .button.slide-down {
+            display: block;
+            animation: slide-down 0.5s ease-out forwards;
+        }
+
+        @keyframes slide-down {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .offline-message, .online-message, .slow-connection-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none;
+            z-index: 20;
+        }
+
+        .online-message {
+            background-color: green;
+        }
+
+        .slow-connection-message {
+            background-color: orange;
+        }
+
+        .offline-message .message-content,
+        .online-message .message-content,
+        .slow-connection-message .message-content {
+            padding: 15px;
+        }
+
+        .offline-message button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Estilos adicionais para modais de PIN */
+        .modal {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .modal button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal input, .modal select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-message" id="offline-message">
+        <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem não estar disponíveis enquanto você estiver offline.</div>
+        <button onclick="closeOfflineMessage()">OK</button>
+    </div>
+
+    <div class="online-message" id="online-message">
+        <div class="message-content">Você agora está online no app.</div>
+    </div>
+
+    <div class="slow-connection-message" id="slow-connection-message">
+        <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar lentamente.</div>
+    </div>
+    
+    <div class="animation-container">
+        <iframe src="https://luanzinh0fc.github.io/Vamos-de-StudyTask/" frameborder="0"></iframe>
+    </div>
+
+    <div class="button-container">
+        <a href="#" class="button" id="portugues-btn">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" alt="Português">
+        </a>
+        <a href="#" class="button hidden" id="redacao-btn">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg" alt="Redação de Português">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/ingl%C3%AAs-3-bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg" alt="Inglês">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/matem%C3%A1tica-3bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg" alt="Matemática">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-da-natureza-3bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg" alt="Ciências da Natureza">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-humanas-3bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg" alt="Ciências Humanas">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/educa%C3%A7%C3%A3o-f%C3%ADsica-3bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg" alt="Educação Física">
+        </a>
+        <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre" class="button">
+            <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg" alt="Qualificação Profissional">
+        </a>
+    </div>
+
+    <div class="notification" id="notification">Olá Aluno, por favor toque novamente para acessar a atividade.</div>
+
+    <div id="pin-setup-modal" class="modal">
+        <div class="message-content">
+            Deseja configurar um PIN para o aplicativo?
+        </div>
+        <button onclick="startPinSetup(true)">Sim</button>
+        <button onclick="startPinSetup(false)">Não</button>
+    </div>
+
+    <div id="pin-create-modal" class="modal">
+        <div class="message-content">
+            Defina seu PIN de 4 dígitos:
+            <input type="password" id="pin-create-input" maxlength="4" inputmode="numeric">
+            <button onclick="askToSavePin()">Salvar PIN</button>
+        </div>
+    </div>
+
+    <div id="pin-save-modal" class="modal">
+        <div class="message-content">
+            Deseja salvar o PIN na memória?
+        </div>
+        <button onclick="savePin(true)">Sim</button>
+        <button onclick="savePin(false)">Não</button>
+    </div>
+
+    <div id="pin-frequency-modal" class="modal">
+        <div class="message-content">
+            Selecione a frequência para solicitar o PIN:
+            <select id="pin-frequency">
+                <option value="60">Toda hora</option>
+                <option value="15">A cada 15 minutos</option>
+                <option value="10">A cada 10 minutos</option>
+                <option value="1440">A cada 24 horas</option>
+            </select>
+            <button onclick="savePinFrequency()">Salvar</button>
+        </div>
+    </div>
+
+    <div id="pin-entry-modal" class="modal">
+        <div class="message-content">
+            Digite seu PIN:
+            <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
+            <button onclick="verifyPin()">Entrar</button>
+            <button onclick="recoverPin()">Recuperar PIN</button>
+        </div>
+    </div>
+
+    <script>
+        // PIN Setup Logic
+        function startPinSetup(confirm) {
+            const pinSetupModal = document.getElementById('pin-setup-modal');
+            if (confirm) {
+                pinSetupModal.classList.remove('active');
+                document.getElementById('pin-create-modal').classList.add('active');
+            } else {
+                pinSetupModal.classList.remove('active');
+                localStorage.setItem('pinSetupComplete', 'no');
+            }
+        }
+
+        function askToSavePin() {
+            const pinInput = document.getElementById('pin-create-input').value;
+            if (pinInput.length === 4 && /^\d+$/.test(pinInput)) {
+                localStorage.setItem('tempPin', pinInput);
+                document.getElementById('pin-create-modal').classList.remove('active');
+                document.getElementById('pin-save-modal').classList.add('active');
+            } else {
+                alert('PIN inválido. Por favor, insira um PIN de 4 dígitos.');
+            }
+        }
+
+        function savePin(saveToMemory) {
+            const tempPin = localStorage.getItem('tempPin');
+            if (saveToMemory) {
+                localStorage.setItem('userPin', tempPin);
+                alert('PIN salvo na memória.');
+            } else {
+                alert('PIN não será salvo na memória.');
+            }
+            localStorage.removeItem('tempPin');
+            document.getElementById('pin-save-modal').classList.remove('active');
+            document.getElementById('pin-frequency-modal').classList.add('active');
+        }
+
+        function savePinFrequency() {
+            const frequency = document.getElementById('pin-frequency').value;
+            localStorage.setItem('pinFrequency', frequency);
+            document.getElementById('pin-frequency-modal').classList.remove('active');
+            localStorage.setItem('pinSetupComplete', 'yes');
+            localStorage.setItem('lastPinCheck', new Date().getTime());
+            alert('Configuração de PIN concluída!');
+        }
+
+        function verifyPin() {
+            const enteredPin = document.getElementById('pin-entry-input').value;
+            const storedPin = localStorage.getItem('userPin');
+            if (enteredPin === storedPin) {
+                alert("Acesso concedido!");
+                document.getElementById('pin-entry-modal').classList.remove('active');
+                localStorage.setItem('lastPinCheck', new Date().getTime());
+            } else {
+                alert("PIN incorreto. Tente novamente.");
+            }
+        }
+
+        function recoverPin() {
+            const storedPin = localStorage.getItem('userPin');
+            if (storedPin) {
+                const hint = `Seu PIN começa com ${storedPin[0]} e termina com ${storedPin[storedPin.length - 1]}.`;
+                alert(hint);
+            } else {
+                alert("Nenhum PIN salvo na memória.");
+            }
+        }
+
+        function checkPinEntry() {
+            const pinSetupComplete = localStorage.getItem('pinSetupComplete');
+            const userPin = localStorage.getItem('userPin');
+            const lastPinCheck = localStorage.getItem('lastPinCheck');
+            const pinFrequency = localStorage.getItem('pinFrequency') || 60; // Default to every hour
+
+            if (pinSetupComplete === 'yes' && userPin) {
+                const now = new Date().getTime();
+                const elapsedTime = (now - lastPinCheck) / (1000 * 60); // in minutes
+                if (elapsedTime > pinFrequency) {
+                    document.getElementById('pin-entry-modal').classList.add('active');
+                }
+            }
+        }
+
+        window.onload = function() {
+            const pinSetupComplete = localStorage.getItem('pinSetupComplete');
+            if (pinSetupComplete !== 'no') {
+                document.getElementById('pin-setup-modal').classList.add('active');
+            } else {
+                checkPinEntry();
+            }
+        };
+
+        // Existing Code
+        let portuguesClickCount = 0;
+
+        document.getElementById('portugues-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            portuguesClickCount++;
+            var redacaoBtn = document.getElementById('redacao-btn');
+            var notification = document.getElementById('notification');
+            
+            if (portuguesClickCount === 1) {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            } else if (portuguesClickCount === 2) {
+                window.location.href = "https://sites.google.com/view/cpiadestudytask/portugu%C3%AAs-3bimestre";
+            }
+
+            if (redacaoBtn.classList.contains('hidden')) {
+                redacaoBtn.classList.remove('hidden');
+                redacaoBtn.classList.add('slide-down');
+            }
+        });
+
+        document.getElementById('redacao-btn').addEventListener('click', function() {
+            window.location.href = "https://sites.google.com/view/cpiadestudytask/reda%C3%A7%C3%B5es-3bimestre";
+        });
+
+        // Desabilita o menu de contexto do botão
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('contextmenu', event => {
+                event.preventDefault();
+            });
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registrado com sucesso:', registration);
+                }).catch(error => {
+                    console.log('Falha ao registrar o ServiceWorker:', error);
+                });
+            });
+        }
+
+        // Check connection status
+        function updateOnlineStatus() {
+            const offlineMessage = document.getElementById('offline-message');
+            const onlineMessage = document.getElementById('online-message');
+            const slowConnectionMessage = document.getElementById('slow-connection-message');
+            const hasShownOnlineMessage = localStorage.getItem('hasShownOnlineMessage');
+            const hasShownSlowConnectionMessage = localStorage.getItem('hasShownSlowConnectionMessage');
+
+            if (!navigator.onLine) {
+                offlineMessage.style.display = 'block';
+            } else {
+                offlineMessage.style.display = 'none';
+                if (!hasShownOnlineMessage) {
+                    onlineMessage.style.display = 'block';
+                    setTimeout(() => {
+                        onlineMessage.style.display = 'none';
+                        localStorage.setItem('hasShownOnlineMessage', 'true');
+                    }, 2000);
+                }
+
+                // Check for slow connection
+                if (navigator.connection) {
+                    const { effectiveType } = navigator.connection;
+                    if ((effectiveType === '2g' || effectiveType === 'slow-2g') && !hasShownSlowConnectionMessage) {
+                        slowConnectionMessage.style.display = 'block';
+                        setTimeout(() => {
+                            slowConnectionMessage.style.display = 'none';
+                            localStorage.setItem('hasShownSlowConnectionMessage', 'true');
+                        }, 4000);
+                    }
+                }
+            }
+        }
+
+        function closeOfflineMessage() {
+            const offlineMessage = document.getElementById('offline-message');
+            offlineMessage.style.display = 'none';
+        }
+
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        updateOnlineStatus();
+    </script>
+</body>
+</html>
