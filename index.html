@@ -6,7 +6,7 @@
     <title>StudyTask</title>
     <style>
         body {
-            background-color: #8533f1;
+            background-color: #8533f1; /* Cor de fundo original */
             font-family: Arial, sans-serif;
             margin: 0;
             overflow: hidden;
@@ -15,7 +15,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            color: white;
+            color: #ffffff;
         }
 
         #loading-screen {
@@ -42,7 +42,7 @@
             margin: 0;
             font-size: 2rem;
             text-align: center;
-            color: yellow;
+            color: yellow; /* Cor original do título */
         }
 
         #loading-screen p {
@@ -140,6 +140,7 @@
             transition: opacity 0.3s ease-in-out;
             pointer-events: none;
             z-index: 10;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .notification.show {
@@ -245,6 +246,15 @@
             z-index: 50;
             display: none;
         }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -300,6 +310,7 @@
         </div>
 
         <div class="notification" id="notification">Olá Aluno, por favor toque novamente para acessar a atividade.</div>
+        <div class="notification" id="unlock-message" style="display: none;">Aplicativo desbloqueado com sucesso!</div>
 
         <div id="pin-setup-modal" class="modal">
             <div class="message-content">
@@ -344,6 +355,14 @@
                 <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
                 <button onclick="verifyPin()">Entrar</button>
                 <button onclick="recoverPin()">Recuperar PIN</button>
+            </div>
+        </div>
+
+        <div id="admin-pin-modal" class="modal">
+            <div class="message-content">
+                Digite o PIN de recuperação do administrador:
+                <input type="password" id="admin-pin-input" maxlength="8">
+                <button onclick="verifyAdminPin()">Desbloquear</button>
             </div>
         </div>
     </div>
@@ -402,7 +421,7 @@
                 document.getElementById('pin-create-modal').classList.remove('active');
                 document.getElementById('pin-save-modal').classList.add('active');
             } else {
-                alert('PIN inválido. Por favor, insira um PIN de 4 dígitos.');
+                displayMessage('PIN inválido. Por favor, insira um PIN de 4 dígitos.');
             }
         }
 
@@ -410,9 +429,9 @@
             const tempPin = localStorage.getItem('tempPin');
             if (saveToMemory) {
                 localStorage.setItem('userPin', tempPin);
-                alert('PIN salvo na memória.');
+                displayMessage('PIN salvo na memória.');
             } else {
-                alert('PIN não será salvo na memória.');
+                displayMessage('PIN não será salvo na memória.');
             }
             localStorage.removeItem('tempPin');
             document.getElementById('pin-save-modal').classList.remove('active');
@@ -425,7 +444,7 @@
             document.getElementById('pin-frequency-modal').classList.remove('active');
             localStorage.setItem('pinSetupComplete', 'yes');
             localStorage.setItem('lastPinCheck', new Date().getTime());
-            alert('Configuração de PIN concluída!');
+            displayMessage('Configuração de PIN concluída!');
         }
 
         function verifyPin() {
@@ -433,33 +452,60 @@
             const storedPin = localStorage.getItem('userPin');
             let attempts = parseInt(localStorage.getItem('pinAttempts') || '0');
 
-            if (attempts >= 3) {
-                alert("Acesso bloqueado. Por favor, recupere seu PIN.");
+            if (attempts >= 10) {
+                displayMessage("Acesso bloqueado. Por favor, contate o administrador para desbloquear.");
                 document.getElementById('pin-entry-input').style.display = 'none';
                 document.querySelector("#pin-entry-modal button:not(:last-child)").style.display = 'none';
+                document.getElementById('admin-pin-modal').classList.add('active');
+                showBlurredBackground();
                 return;
             }
 
             if (enteredPin === storedPin) {
-                alert("Acesso concedido!");
                 document.getElementById('pin-entry-modal').classList.remove('active');
                 hideBlurredBackground();
                 localStorage.setItem('lastPinCheck', new Date().getTime());
                 localStorage.setItem('pinAttempts', '0');
+                showUnlockMessage();
             } else {
                 attempts++;
                 localStorage.setItem('pinAttempts', attempts.toString());
-                alert(`PIN incorreto. Tentativas restantes: ${3 - attempts}`);
+                displayMessage(`PIN incorreto. Tentativas restantes: ${10 - attempts}`);
             }
+        }
+
+        function verifyAdminPin() {
+            const enteredAdminPin = document.getElementById('admin-pin-input').value;
+            const adminPin = '24250@Ln';
+
+            if (enteredAdminPin === adminPin) {
+                displayMessage("Aplicativo desbloqueado pelo administrador.");
+                localStorage.setItem('pinAttempts', '0');
+                document.getElementById('admin-pin-modal').classList.remove('active');
+                document.getElementById('pin-entry-input').style.display = 'block';
+                document.querySelector("#pin-entry-modal button:not(:last-child)").style.display = 'block';
+                hideBlurredBackground();
+                showUnlockMessage();
+            } else {
+                displayMessage("PIN de recuperação incorreto.");
+            }
+        }
+
+        function showUnlockMessage() {
+            const unlockMessage = document.getElementById('unlock-message');
+            unlockMessage.style.display = 'block';
+            setTimeout(() => {
+                unlockMessage.style.display = 'none';
+            }, 3000);
         }
 
         function recoverPin() {
             const storedPin = localStorage.getItem('userPin');
             if (storedPin) {
                 const hint = `Seu PIN começa com ${storedPin[0]} e termina com ${storedPin[storedPin.length - 1]}.`;
-                alert(hint);
+                displayMessage(hint);
             } else {
-                alert("Nenhum PIN salvo na memória.");
+                displayMessage("Nenhum PIN salvo na memória.");
             }
         }
 
@@ -557,6 +603,17 @@
         function closeOfflineMessage() {
             const offlineMessage = document.getElementById('offline-message');
             offlineMessage.style.display = 'none';
+        }
+
+        function displayMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification show';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                document.body.removeChild(notification);
+            }, 3000);
         }
 
         window.addEventListener('online', updateOnlineStatus);
