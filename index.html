@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTask</title>
     <style>
         body {
-            background-color: #8533f1; /* Cor de fundo original */
+            background-color: #8533f1;
             font-family: Arial, sans-serif;
             margin: 0;
             overflow: hidden;
@@ -42,7 +43,7 @@
             margin: 0;
             font-size: 2rem;
             text-align: center;
-            color: yellow; /* Cor original do título */
+            color: yellow;
         }
 
         #loading-screen p {
@@ -120,6 +121,7 @@
                 transform: translateY(-20px);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -147,7 +149,9 @@
             opacity: 1;
         }
 
-        .offline-message, .online-message, .slow-connection-message {
+        .offline-message,
+        .online-message,
+        .slow-connection-message {
             position: fixed;
             top: 0;
             left: 0;
@@ -225,7 +229,8 @@
             background-color: #0056b3;
         }
 
-        .modal input, .modal select {
+        .modal input,
+        .modal select {
             padding: 10px;
             font-size: 16px;
             margin-top: 10px;
@@ -246,21 +251,99 @@
             z-index: 50;
             display: none;
         }
-        
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
         }
+
+        /* Estilos da Animação de Texto e Ícone */
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            opacity: 1;
+            animation: iconBounce 2s infinite;
+        }
+
+        .text-container {
+            position: relative;
+            top: 10px;
+        }
+
+        .text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid #333;
+            display: inline-block;
+            background: linear-gradient(90deg,
+                    #ff6f61,
+                    #ffcc33,
+                    #33ccff,
+                    #8e44ad,
+                    #2ecc71,
+                    #ff3e96,
+                    #3498db,
+                    #f39c12,
+                    #e74c3c,
+                    #1abc9c,
+                    #d35400,
+                    #9b59b6);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 8s ease infinite;
+        }
+
+        @keyframes iconBounce {
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        @keyframes textGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div id="loading-screen">
         <div class="icon-container">
-            <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone de Carregamento">
+            <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png"
+                alt="Ícone de Carregamento">
             <h1>StudyTask</h1>
         </div>
         <p>Carregando...</p>
@@ -270,7 +353,8 @@
         <div id="blurred-background"></div>
 
         <div class="offline-message" id="offline-message">
-            <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem não estar disponíveis enquanto você estiver offline.</div>
+            <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem
+                não estar disponíveis enquanto você estiver offline.</div>
             <button onclick="closeOfflineMessage()">OK</button>
         </div>
 
@@ -279,33 +363,43 @@
         </div>
 
         <div class="slow-connection-message" id="slow-connection-message">
-            <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar lentamente.</div>
+            <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar
+                lentamente.</div>
         </div>
 
         <div class="button-container">
             <a href="#" class="button" id="portugues-btn">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" alt="Português">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg"
+                    alt="Português">
             </a>
             <a href="#" class="button hidden" id="redacao-btn">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg" alt="Redação de Português">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg"
+                    alt="Redação de Português">
             </a>
             <a href="https://sites.google.com/view/cpiadestudytask/ingl%C3%AAs-3-bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg" alt="Inglês">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg"
+                    alt="Inglês">
             </a>
             <a href="https://sites.google.com/view/cpiadestudytask/matem%C3%A1tica-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg" alt="Matemática">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg"
+                    alt="Matemática">
             </a>
             <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-da-natureza-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg" alt="Ciências da Natureza">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg"
+                    alt="Ciências da Natureza">
             </a>
             <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-humanas-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg" alt="Ciências Humanas">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg"
+                    alt="Ciências Humanas">
             </a>
             <a href="https://sites.google.com/view/cpiadestudytask/educa%C3%A7%C3%A3o-f%C3%ADsica-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg" alt="Educação Física">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg"
+                    alt="Educação Física">
             </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg" alt="Qualificação Profissional">
+            <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre"
+                class="button">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg"
+                    alt="Qualificação Profissional">
             </a>
         </div>
 
@@ -350,6 +444,17 @@
         </div>
 
         <div id="pin-entry-modal" class="modal">
+            <!-- Animação de Texto e Ícone -->
+            <div class="container">
+                <img id="icon" class="icon"
+                    src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png"
+                    alt="StudyTask Icon">
+                <div class="text-container">
+                    <div id="text" class="text">Seja bem-vindo</div>
+                </div>
+            </div>
+            <!-- Fim da Animação -->
+
             <div class="message-content">
                 Digite seu PIN:
                 <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
@@ -382,7 +487,7 @@
             document.getElementById('blurred-background').style.display = 'none';
         }
 
-        window.onload = function() {
+        window.onload = function () {
             let loadingTime = 2000;
 
             if (navigator.connection) {
@@ -527,12 +632,12 @@
 
         let portuguesClickCount = 0;
 
-        document.getElementById('portugues-btn').addEventListener('click', function(event) {
+        document.getElementById('portugues-btn').addEventListener('click', function (event) {
             event.preventDefault();
             portuguesClickCount++;
             var redacaoBtn = document.getElementById('redacao-btn');
             var notification = document.getElementById('notification');
-            
+
             if (portuguesClickCount === 1) {
                 notification.classList.add('show');
                 setTimeout(() => {
@@ -548,7 +653,7 @@
             }
         });
 
-        document.getElementById('redacao-btn').addEventListener('click', function() {
+        document.getElementById('redacao-btn').addEventListener('click', function () {
             window.location.href = "https://sites.google.com/view/cpiadestudytask/reda%C3%A7%C3%B5es-3bimestre";
         });
 
@@ -588,7 +693,9 @@
                 }
 
                 if (navigator.connection) {
-                    const { effectiveType } = navigator.connection;
+                    const {
+                        effectiveType
+                    } = navigator.connection;
                     if ((effectiveType === '2g' || effectiveType === 'slow-2g') && !hasShownSlowConnectionMessage) {
                         slowConnectionMessage.style.display = 'block';
                         setTimeout(() => {
@@ -620,6 +727,63 @@
         window.addEventListener('offline', updateOnlineStatus);
 
         updateOnlineStatus();
+
+        // Script de Animação de Texto
+        const texts = [
+            "",
+            "Vamos Estudar?",
+            "Vamos inovar?",
+            "Vamos Criar?",
+            "Vamos Nos Dedicar?",
+            "StudyTask 🧑‍🎓"
+        ];
+
+        let index = 0;
+        const textElement = document.getElementById('text');
+
+        function typeText(text, callback) {
+            let i = 0;
+            const speed = 100;
+            function type() {
+                if (i < text.length) {
+                    textElement.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    setTimeout(callback, 1000);
+                }
+            }
+            type();
+        }
+
+        function deleteText(callback) {
+            const speed = 50;
+            function del() {
+                if (textElement.textContent.length > 0) {
+                    textElement.textContent = textElement.textContent.slice(0, -1);
+                    setTimeout(del, speed);
+                } else {
+                    setTimeout(callback, 300);
+                }
+            }
+            del();
+        }
+
+        function changeText() {
+            typeText(texts[index], () => {
+                if (texts[index] === "StudyTask 🧑‍🎓") {
+                    textElement.classList.add('no-animation');
+                    textElement.textContent = "StudyTask 🧑‍🎓";
+                    return;
+                }
+                deleteText(() => {
+                    index = (index + 1) % texts.length;
+                    changeText();
+                });
+            });
+        }
+
+        changeText();
     </script>
 </body>
-</html>
+                </html>
