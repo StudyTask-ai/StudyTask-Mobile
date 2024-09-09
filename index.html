@@ -359,10 +359,15 @@
             width: 180px; /* Tamanho aumentado para os botões */
             height: auto;
             border-radius: 8px;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .top-button:hover {
             transform: scale(1.05);
+        }
+
+        .top-button.loading img {
+            opacity: 0.7; /* Indica carregamento */
         }
     </style>
     <link rel="preload" href="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" as="image">
@@ -399,7 +404,7 @@
 
         <!-- Botões pequenos na parte de cima com imagens -->
         <div class="top-buttons">
-            <a href="https://aluno.seduc.ce.gov.br/" class="top-button">
+            <a href="https://aluno.seduc.ce.gov.br/" class="top-button" id="aluno-online-button">
                 <img src="https://github.com/StudyTask-ai/Botao-Aluno-Online-ChatGPT/blob/main/REDA%C3%87%C3%83O%20DE%20PORTUGU%C3%8AS_20240908_061542_0001.jpg?raw=true"
                     alt="Aluno Online">
             </a>
@@ -826,6 +831,13 @@
         }
 
         changeText();
+
+        // Adiciona evento de clique ao botão "Aluno Online"
+        document.getElementById('aluno-online-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            this.classList.add('loading'); // Adiciona a classe para indicar carregamento
+            window.location.href = this.href; // Redireciona para o link
+        });
     </script>
 </body>
 
