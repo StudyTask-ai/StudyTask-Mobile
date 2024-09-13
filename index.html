@@ -32,9 +32,19 @@
         .splash-text {
             font-size: 3em;
             font-weight: bold;
-            color: #FFD700; /* Dourado */
+            color: transparent; /* Removido fundo escuro */
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px #000000;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff2f2f, #ff7e5f, #2ecc71, #3498db);
+            background-size: 600% 600%; /* Aumenta a área de fundo para a animação */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 10s ease infinite; /* Animação de gradiente mais lenta */
+            text-align: center;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .progress-bar {
             width: 80%;
@@ -76,8 +86,8 @@
             max-width: 800px;
         }
         .button {
-            background-color: #ffffff;
-            color: #8533f1;
+            background-color: #ffffff; /* Cor normal dos botões */
+            color: #8533f1; /* Cor do texto dos botões */
             border: none;
             padding: 20px 40px;
             width: 100%;
@@ -88,7 +98,7 @@
             font-weight: bold;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            transition: transform 0.3s;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -105,24 +115,8 @@
         }
         .logo {
             margin-bottom: 10px;
-            width: 100px; /* Aumentado para 100px */
-            height: 100px; /* Aumentado para 100px */
-        }
-        .gradient-text {
-            font-size: 2em;
-            font-weight: bold;
-            background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff7e5f, #ff2f2f, #ff7e5f);
-            background-size: 600% 600%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientAnimation 5s ease infinite;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            width: 100px;
+            height: 100px;
         }
         .theme-icon {
             position: absolute;
@@ -131,6 +125,15 @@
             cursor: pointer;
             width: 40px;
             height: 40px;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 70px; /* Distância do ícone do tema */
+            cursor: pointer;
+            font-size: 1.5em;
+            color: white;
+            display: none; /* Inicialmente escondido */
         }
         .theme-options {
             display: none;
@@ -175,9 +178,6 @@
                 width: 80px; /* Ajustado para 80px em telas menores */
                 height: 80px; /* Ajustado para 80px em telas menores */
             }
-            .gradient-text {
-                font-size: 1.5em;
-            }
             .theme-icon {
                 width: 30px;
                 height: 30px;
@@ -200,7 +200,7 @@
     <div class="container" id="mainContent">
         <!-- Ícone e Nome -->
         <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
-        <div class="gradient-text">StudyTask</div>
+        <div class="splash-text">StudyTask</div> <!-- Manter estilo consistente -->
 
         <!-- Botões de links -->
         <div class="buttons-wrapper">
@@ -240,6 +240,7 @@
 
         <!-- Ícone de tema -->
         <img src="https://cdn-icons-png.flaticon.com/128/15414/15414401.png" alt="Mudar Tema" class="theme-icon" onclick="toggleThemeOptions()">
+        <span class="close-button" id="closeButton" onclick="toggleThemeOptions()">X</span> <!-- Botão de fechar -->
     </div>
 
     <!-- Modal de opções de tema -->
@@ -259,13 +260,16 @@
         const themeOptions = document.getElementById('themeOptions');
         const splashScreen = document.getElementById('splashScreen');
         const mainContent = document.getElementById('mainContent');
+        const closeButton = document.getElementById('closeButton');
 
         // Mostrar ou ocultar opções de tema
         function toggleThemeOptions() {
             if (themeOptions.style.display === 'flex') {
                 themeOptions.style.display = 'none';
+                closeButton.style.display = 'none'; // Ocultar botão de fechar
             } else {
                 themeOptions.style.display = 'flex';
+                closeButton.style.display = 'inline'; // Mostrar botão de fechar
             }
         }
 
@@ -277,8 +281,8 @@
             splashScreen.style.color = textColor;
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(button => {
-                button.style.backgroundColor = textColor;
-                button.style.color = bgColor;
+                button.style.backgroundColor = '#ffffff'; // Cor normal dos botões
+                button.style.color = '#8533f1'; // Cor do texto dos botões
             });
             // Salvar tema no localStorage
             localStorage.setItem('theme', JSON.stringify({ bgColor, textColor }));
