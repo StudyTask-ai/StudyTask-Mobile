@@ -1,844 +1,310 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyTask</title>
     <style>
-        body {
-            background-color: #8533f1;
-            font-family: Arial, sans-serif;
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            color: #ffffff;
+            background-color: #8533f1;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
         }
-
-        #loading-screen {
+        .splash-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background-color: inherit; /* Utiliza a cor de fundo do body */
+            color: inherit; /* Utiliza a cor de texto do body */
+            width: 100%;
+            height: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #8533f1;
-            z-index: 9999;
+            z-index: 10000;
         }
-
-        #loading-screen img {
-            width: 100px;
-            height: auto;
+        .splash-text {
+            font-size: 3em;
+            font-weight: bold;
+            color: #FFD700; /* Dourado */
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #000000;
         }
-
-        #loading-screen h1 {
-            margin: 0;
-            font-size: 2rem;
-            text-align: center;
-            color: yellow;
+        .progress-bar {
+            width: 80%;
+            height: 15px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-
-        #loading-screen p {
-            font-size: 1.2rem;
+        .progress {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #3498db, #2980b9); /* Gradiente de azul */
+            animation: load 1s forwards;
         }
-
-        #main-content {
+        @keyframes load {
+            100% {
+                width: 100%;
+            }
+        }
+        .container {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            background-color: #8533f1;
-            color: white;
-            width: 100%;
             min-height: 100vh;
-            padding-top: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            height: 100vh;
         }
-
-        .icon-container {
+        .buttons-wrapper {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 90%;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
             max-width: 800px;
         }
-
         .button {
-            display: block;
+            background-color: #ffffff;
+            color: #8533f1;
             border: none;
-            border-radius: 12px;
-            padding: 0;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
-            margin-bottom: 10px;
-            opacity: 1;
+            padding: 20px 40px;
             width: 100%;
-            max-width: 400px;
-            background: none;
-        }
-
-        .button img {
-            width: 100%;
-            border-radius: 12px;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-        }
-
-        .button:active {
-            transform: scale(0.95);
-        }
-
-        .button.hidden {
-            display: none;
-        }
-
-        .button.slide-down {
-            display: block;
-            animation: slide-down 0.5s ease-out forwards;
-        }
-
-        @keyframes slide-down {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            color: #333;
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
-            z-index: 10;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .notification.show {
-            opacity: 1;
-        }
-
-        .offline-message,
-        .online-message,
-        .slow-connection-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: red;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            display: none;
-            z-index: 20;
-        }
-
-        .online-message {
-            background-color: green;
-        }
-
-        .slow-connection-message {
-            background-color: orange;
-        }
-
-        .offline-message .message-content,
-        .online-message .message-content,
-        .slow-connection-message .message-content {
-            padding: 15px;
-        }
-
-        .offline-message button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            max-width: 250px;
+            box-sizing: border-box;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .modal {
+        .button img {
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .logo {
+            margin-bottom: 10px;
+            width: 100px; /* Aumentado para 100px */
+            height: 100px; /* Aumentado para 100px */
+        }
+        .gradient-text {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff7e5f, #ff2f2f, #ff7e5f);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 5s ease infinite;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .theme-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+        }
+        .theme-options {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #fff;
-            color: #333;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            width: 100%;
-            text-align: center;
+            background-color: rgba(255, 255, 255, 0.95);
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 100;
+            z-index: 1002;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 500px;
         }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal button {
-            background-color: #007bff;
-            color: #fff;
+        .theme-button {
+            margin: 5px;
             border: none;
             padding: 10px 20px;
-            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        .modal button:hover {
-            background-color: #0056b3;
-        }
-
-        .modal input,
-        .modal select {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        #blurred-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 50;
-            display: none;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Estilos da Animação de Texto e Ícone */
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .icon {
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            opacity: 1;
-            animation: iconBounce 2s infinite;
-        }
-
-        .text-container {
-            position: relative;
-            top: 10px;
-        }
-
-        .text {
-            font-size: 20px;
+            font-size: 1em;
             font-weight: bold;
-            color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 4px solid #333;
-            display: inline-block;
-            background: linear-gradient(90deg,
-                    #ff6f61,
-                    #ffcc33,
-                    #33ccff,
-                    #8e44ad,
-                    #2ecc71,
-                    #ff3e96,
-                    #3498db,
-                    #f39c12,
-                    #e74c3c,
-                    #1abc9c,
-                    #d35400,
-                    #9b59b6);
-            background-size: 600% 600%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradient 8s ease infinite;
-        }
-
-        @keyframes iconBounce {
-            0%,
-            100% {
-                transform: translate(-50%, 0);
-            }
-
-            50% {
-                transform: translate(-50%, -10px);
-            }
-        }
-
-        @keyframes textGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Estilos para os botões pequenos na parte de cima */
-        .top-buttons {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 10px 0;
-        }
-
-        .top-button {
-            background-color: transparent;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            transition: transform 0.2s ease-in-out;
-            margin: 0 2px; /* Espaço mínimo entre os botões */
-        }
-
-        .top-button img {
-            width: 180px; /* Tamanho aumentado para os botões */
-            height: auto;
             border-radius: 8px;
-            transition: opacity 0.3s ease-in-out;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .theme-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .top-button:hover {
-            transform: scale(1.05);
-        }
-
-        .top-button.loading img {
-            opacity: 0.7; /* Indica carregamento */
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 600px) {
+            .splash-text {
+                font-size: 2em;
+            }
+            .logo {
+                width: 80px; /* Ajustado para 80px em telas menores */
+                height: 80px; /* Ajustado para 80px em telas menores */
+            }
+            .gradient-text {
+                font-size: 1.5em;
+            }
+            .theme-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
-    <link rel="preload" href="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg" as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg" as="image">
 </head>
-
 <body>
-    <div id="loading-screen">
-        <div class="icon-container">
-            <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png"
-                alt="Ícone de Carregamento">
-            <h1>StudyTask</h1>
+    <!-- Tela de carregamento -->
+    <div class="splash-screen" id="splashScreen">
+        <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
+        <div class="splash-text">StudyTask</div>
+        <div>Carregando...</div>
+        <div class="progress-bar">
+            <div class="progress"></div>
         </div>
-        <p>Carregando...</p>
     </div>
 
-    <div id="main-content">
-        <div id="blurred-background"></div>
+    <!-- Conteúdo principal -->
+    <div class="container" id="mainContent">
+        <!-- Ícone e Nome -->
+        <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
+        <div class="gradient-text">StudyTask</div>
 
-        <div class="offline-message" id="offline-message">
-            <div class="message-content">Você está agora, nesse exato momento, offline. Algumas funcionalidades podem
-                não estar disponíveis enquanto você estiver offline.</div>
-            <button onclick="closeOfflineMessage()">OK</button>
+        <!-- Botões de links -->
+        <div class="buttons-wrapper">
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/PORTUGU-S-3-BIMESTRE-/'">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Português Ícone">
+                Português 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/Reda-es-portugu-s-3-BIMESTRE-/'">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Redação Ícone">
+                Redação Português 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/INGL-S-3-BIMESTRE-/'">
+                <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/INGL%C3%8AS.gif" alt="Inglês Ícone">
+                Inglês 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/MATEM-TICA-3-BIMESTRE-/'">
+                <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/MATEM%C3%81TICA.gif?raw=true" alt="Matemática Ícone">
+                Matemática 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-3-BIMESTRE-/'">
+                <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20DA%20NATUREZA.gif?raw=true" alt="Ciências da Natureza Ícone">
+                Ciências da Natureza 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/CIENCIAS-HUMANAS-/'">
+                <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20HUMANAS.gif?raw=true" alt="Ciências Humanas Ícone">
+                Ciências Humanas
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/EDUCA-O-F-SICA-3-BIMESTRE-/'">
+                <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/educa%C3%A7%C3%A3o%20f%C3%ADsica.gif?raw=true" alt="Educação Física Ícone">
+                Educação Física 3° Bimestre
+            </button>
+            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/Qualifica-o-Profissional-3-BIMESTRE-/'">
+                <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/qualifica%C3%A7%C3%A3o%20Profissional.gif?raw=true" alt="Qualificação Profissional Ícone">
+                Qualificação Profissional 3° Bimestre
+            </button>
         </div>
 
-        <div class="online-message" id="online-message">
-            <div class="message-content">Você agora está online no app.</div>
-        </div>
+        <!-- Ícone de tema -->
+        <img src="https://cdn-icons-png.flaticon.com/128/15414/15414401.png" alt="Mudar Tema" class="theme-icon" onclick="toggleThemeOptions()">
+    </div>
 
-        <div class="slow-connection-message" id="slow-connection-message">
-            <div class="message-content">Sua internet está muito lenta. Algumas funcionalidades podem carregar
-                lentamente.</div>
-        </div>
-
-        <!-- Botões pequenos na parte de cima com imagens -->
-        <div class="top-buttons">
-            <a href="https://aluno.seduc.ce.gov.br/" class="top-button" id="aluno-online-button">
-                <img src="https://github.com/StudyTask-ai/Botao-Aluno-Online-ChatGPT/blob/main/REDA%C3%87%C3%83O%20DE%20PORTUGU%C3%8AS_20240908_061542_0001.jpg?raw=true"
-                    alt="Aluno Online">
-            </a>
-            <a href="https://chatgpt.com/" class="top-button">
-                <img src="https://github.com/StudyTask-ai/Botao-Aluno-Online-ChatGPT/blob/main/REDA%C3%87%C3%83O%20DE%20PORTUGU%C3%8AS_20240908_061542_0000.jpg?raw=true"
-                    alt="ChatGPT">
-            </a>
-        </div>
-
-        <div class="button-container">
-            <a href="#" class="button" id="portugues-btn">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/PORTUGU%C3%8AS%20III%20BIMESTRE%20.jpg"
-                    alt="Português">
-            </a>
-            <a href="#" class="button hidden" id="redacao-btn">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/Reda%C3%A7%C3%A3o%20de%20Portugu%C3%AAs%20.jpg"
-                    alt="Redação de Português">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/ingl%C3%AAs-3-bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/INGL%C3%8AS%203%20BIMESTRE%20.jpg"
-                    alt="Inglês">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/matem%C3%A1tica-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/MATEM%C3%81TICA%20III%20BIMESTRE%20.jpg"
-                    alt="Matemática">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-da-natureza-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20DA%20NATUREZA%20III%20BIMESTRE%20.jpg"
-                    alt="Ciências da Natureza">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/ci%C3%AAncias-humanas-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/CI%C3%8ANCIAS%20HUMANAS%20.jpg"
-                    alt="Ciências Humanas">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/educa%C3%A7%C3%A3o-f%C3%ADsica-3bimestre" class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/ED%20F%C3%8DSICA%20III%20BIMESTRE%20.jpg"
-                    alt="Educação Física">
-            </a>
-            <a href="https://sites.google.com/view/cpiadestudytask/qualifica%C3%A7%C3%A3o-profissional-3bimestre"
-                class="button">
-                <img src="https://raw.githubusercontent.com/StudyTask-ai/StudyTask/main/QUALIFICA%C3%87%C3%83O%20PROFISSIONAL%20.jpg"
-                    alt="Qualificação Profissional">
-            </a>
-        </div>
-
-        <div class="notification" id="notification">Olá Aluno, por favor toque novamente para acessar a atividade.</div>
-        <div class="notification" id="unlock-message" style="display: none;">Aplicativo desbloqueado com sucesso!</div>
-
-        <div id="pin-setup-modal" class="modal">
-            <div class="message-content">
-                Deseja configurar um PIN para o aplicativo?
-            </div>
-            <button onclick="startPinSetup(true)">Sim</button>
-            <button onclick="startPinSetup(false)">Não</button>
-        </div>
-
-        <div id="pin-create-modal" class="modal">
-            <div class="message-content">
-                Defina seu PIN de 4 dígitos:
-                <input type="password" id="pin-create-input" maxlength="4" inputmode="numeric">
-                <button onclick="askToSavePin()">Salvar PIN</button>
-            </div>
-        </div>
-
-        <div id="pin-save-modal" class="modal">
-            <div class="message-content">
-                Deseja salvar o PIN na memória?
-            </div>
-            <button onclick="savePin(true)">Sim</button>
-            <button onclick="savePin(false)">Não</button>
-        </div>
-
-        <div id="pin-frequency-modal" class="modal">
-            <div class="message-content">
-                Selecione a frequência para solicitar o PIN:
-                <select id="pin-frequency">
-                    <option value="60">Toda hora</option>
-                    <option value="15">A cada 15 minutos</option>
-                    <option value="10">A cada 10 minutos</option>
-                    <option value="1440">A cada 24 horas</option>
-                </select>
-                <button onclick="savePinFrequency()">Salvar</button>
-            </div>
-        </div>
-
-        <div id="pin-entry-modal" class="modal">
-            <!-- Animação de Texto e Ícone -->
-            <div class="container">
-                <img id="icon" class="icon"
-                    src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png"
-                    alt="StudyTask Icon">
-                <div class="text-container">
-                    <div id="text" class="text">Seja bem-vindo</div>
-                </div>
-            </div>
-            <!-- Fim da Animação -->
-
-            <div class="message-content">
-                Digite seu PIN:
-                <input type="password" id="pin-entry-input" maxlength="4" inputmode="numeric">
-                <button onclick="verifyPin()">Entrar</button>
-                <button onclick="recoverPin()">Recuperar PIN</button>
-            </div>
-        </div>
-
-        <div id="admin-pin-modal" class="modal">
-            <div class="message-content">
-                Digite o PIN de recuperação do administrador:
-                <input type="password" id="admin-pin-input" maxlength="8">
-                <button onclick="verifyAdminPin()">Desbloquear</button>
-            </div>
-        </div>
+    <!-- Modal de opções de tema -->
+    <div class="theme-options" id="themeOptions">
+        <h2>Escolha um Tema</h2>
+        <button class="theme-button" style="background-color: #000000; color: #ffffff;" onclick="setTheme('#000000', '#ffffff')">Preto e Branco</button>
+        <button class="theme-button" style="background-color: #333333; color: #ffffff;" onclick="setTheme('#333333', '#ffffff')">Cinza Escuro</button>
+        <button class="theme-button" style="background-color: #8533f1; color: #ffffff;" onclick="setTheme('#8533f1', '#ffffff')">Roxo</button>
+        <button class="theme-button" style="background-color: #AD7DEC; color: #ffffff;" onclick="setTheme('#AD7DEC', '#ffffff')">Lilás</button>
+        <button class="theme-button" style="background-color: #ff7e5f; color: #ffffff;" onclick="setTheme('#ff7e5f', '#ffffff')">Laranja</button>
+        <button class="theme-button" style="background-color: #3498db; color: #ffffff;" onclick="setTheme('#3498db', '#ffffff')">Azul</button>
+        <button class="theme-button" style="background-color: #2ecc71; color: #ffffff;" onclick="setTheme('#2ecc71', '#ffffff')">Verde Claro</button>
+        <button class="theme-button" style="background-color: #ffffff; color: #000000;" onclick="setTheme('#ffffff', '#000000')">Branco e Preto</button>
     </div>
 
     <script>
+        const themeOptions = document.getElementById('themeOptions');
+        const splashScreen = document.getElementById('splashScreen');
+        const mainContent = document.getElementById('mainContent');
+
+        // Mostrar ou ocultar opções de tema
+        function toggleThemeOptions() {
+            if (themeOptions.style.display === 'flex') {
+                themeOptions.style.display = 'none';
+            } else {
+                themeOptions.style.display = 'flex';
+            }
+        }
+
+        // Definir tema e salvar no localStorage
+        function setTheme(bgColor, textColor) {
+            document.body.style.backgroundColor = bgColor;
+            document.body.style.color = textColor;
+            splashScreen.style.backgroundColor = bgColor;
+            splashScreen.style.color = textColor;
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.style.backgroundColor = textColor;
+                button.style.color = bgColor;
+            });
+            // Salvar tema no localStorage
+            localStorage.setItem('theme', JSON.stringify({ bgColor, textColor }));
+        }
+
+        // Aplicar tema armazenado
+        function applyStoredTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                const { bgColor, textColor } = JSON.parse(storedTheme);
+                setTheme(bgColor, textColor);
+            }
+        }
+
+        // Função para ocultar a tela de carregamento e mostrar o conteúdo principal
         function showMainContent() {
-            document.body.style.overflow = 'auto';
-            document.getElementById('loading-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'flex';
+            splashScreen.style.display = 'none';
+            mainContent.style.display = 'flex';
+            document.body.style.overflowY = 'auto'; // Habilitar rolagem
         }
 
-        function showBlurredBackground() {
-            document.getElementById('blurred-background').style.display = 'block';
-        }
-
-        function hideBlurredBackground() {
-            document.getElementById('blurred-background').style.display = 'none';
-        }
-
-        window.onload = function () {
-            let loadingTime = 2000;
-
-            if (navigator.connection) {
-                const connectionType = navigator.connection.effectiveType;
-                if (connectionType === '2g' || connectionType === 'slow-2g') {
-                    loadingTime = 5000;
-                }
-            }
-
-            setTimeout(() => {
-                showMainContent();
-                const pinSetupComplete = localStorage.getItem('pinSetupComplete');
-                if (!pinSetupComplete) {
-                    document.getElementById('pin-setup-modal').classList.add('active');
-                } else {
-                    checkPinEntry();
-                }
-            }, loadingTime);
+        // Aplicar tema armazenado ao carregar a página
+        window.onload = () => {
+            applyStoredTheme();
+            setTimeout(showMainContent, 1000); // Mostrar conteúdo após 1 segundo
         };
-
-        function startPinSetup(confirm) {
-            const pinSetupModal = document.getElementById('pin-setup-modal');
-            if (confirm) {
-                pinSetupModal.classList.remove('active');
-                document.getElementById('pin-create-modal').classList.add('active');
-            } else {
-                pinSetupModal.classList.remove('active');
-                localStorage.setItem('pinSetupComplete', 'no');
-            }
-        }
-
-        function askToSavePin() {
-            const pinInput = document.getElementById('pin-create-input').value;
-            if (pinInput.length === 4 && /^\d+$/.test(pinInput)) {
-                localStorage.setItem('tempPin', pinInput);
-                document.getElementById('pin-create-modal').classList.remove('active');
-                document.getElementById('pin-save-modal').classList.add('active');
-            } else {
-                displayMessage('PIN inválido. Por favor, insira um PIN de 4 dígitos.');
-            }
-        }
-
-        function savePin(saveToMemory) {
-            const tempPin = localStorage.getItem('tempPin');
-            if (saveToMemory) {
-                localStorage.setItem('userPin', tempPin);
-                displayMessage('PIN salvo na memória.');
-            } else {
-                displayMessage('PIN não será salvo na memória.');
-            }
-            localStorage.removeItem('tempPin');
-            document.getElementById('pin-save-modal').classList.remove('active');
-            document.getElementById('pin-frequency-modal').classList.add('active');
-        }
-
-        function savePinFrequency() {
-            const frequency = document.getElementById('pin-frequency').value;
-            localStorage.setItem('pinFrequency', frequency);
-            document.getElementById('pin-frequency-modal').classList.remove('active');
-            localStorage.setItem('pinSetupComplete', 'yes');
-            localStorage.setItem('lastPinCheck', new Date().getTime());
-            displayMessage('Configuração de PIN concluída!');
-        }
-
-        function verifyPin() {
-            const enteredPin = document.getElementById('pin-entry-input').value;
-            const storedPin = localStorage.getItem('userPin');
-            let attempts = parseInt(localStorage.getItem('pinAttempts') || '0');
-
-            if (attempts >= 10) {
-                displayMessage("Acesso bloqueado. Por favor, contate o administrador para desbloquear.");
-                document.getElementById('pin-entry-input').style.display = 'none';
-                document.querySelector("#pin-entry-modal button:not(:last-child)").style.display = 'none';
-                document.getElementById('admin-pin-modal').classList.add('active');
-                showBlurredBackground();
-                return;
-            }
-
-            if (enteredPin === storedPin) {
-                document.getElementById('pin-entry-modal').classList.remove('active');
-                hideBlurredBackground();
-                localStorage.setItem('lastPinCheck', new Date().getTime());
-                localStorage.setItem('pinAttempts', '0');
-                showUnlockMessage();
-            } else {
-                attempts++;
-                localStorage.setItem('pinAttempts', attempts.toString());
-                displayMessage(`PIN incorreto. Tentativas restantes: ${10 - attempts}`);
-            }
-        }
-
-        function verifyAdminPin() {
-            const enteredAdminPin = document.getElementById('admin-pin-input').value;
-            const adminPin = '24250@Ln';
-
-            if (enteredAdminPin === adminPin) {
-                displayMessage("Aplicativo desbloqueado pelo administrador.");
-                localStorage.setItem('pinAttempts', '0');
-                document.getElementById('admin-pin-modal').classList.remove('active');
-                document.getElementById('pin-entry-input').style.display = 'block';
-                document.querySelector("#pin-entry-modal button:not(:last-child)").style.display = 'block';
-                hideBlurredBackground();
-                showUnlockMessage();
-            } else {
-                displayMessage("PIN de recuperação incorreto.");
-            }
-        }
-
-        function showUnlockMessage() {
-            const unlockMessage = document.getElementById('unlock-message');
-            unlockMessage.style.display = 'block';
-            setTimeout(() => {
-                unlockMessage.style.display = 'none';
-            }, 3000);
-        }
-
-        function recoverPin() {
-            const storedPin = localStorage.getItem('userPin');
-            if (storedPin) {
-                const hint = `Seu PIN começa com ${storedPin[0]} e termina com ${storedPin[storedPin.length - 1]}.`;
-                displayMessage(hint);
-            } else {
-                displayMessage("Nenhum PIN salvo na memória.");
-            }
-        }
-
-        function checkPinEntry() {
-            const pinSetupComplete = localStorage.getItem('pinSetupComplete');
-            const userPin = localStorage.getItem('userPin');
-            const lastPinCheck = localStorage.getItem('lastPinCheck');
-            const pinFrequency = localStorage.getItem('pinFrequency') || 60;
-
-            if (pinSetupComplete === 'yes' && userPin) {
-                const now = new Date().getTime();
-                const elapsedTime = (now - lastPinCheck) / (1000 * 60);
-                if (elapsedTime > pinFrequency) {
-                    document.getElementById('pin-entry-modal').classList.add('active');
-                    showBlurredBackground();
-                }
-            }
-        }
-
-        let portuguesClickCount = 0;
-
-        document.getElementById('portugues-btn').addEventListener('click', function (event) {
-            event.preventDefault();
-            portuguesClickCount++;
-            var redacaoBtn = document.getElementById('redacao-btn');
-            var notification = document.getElementById('notification');
-
-            if (portuguesClickCount === 1) {
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            } else if (portuguesClickCount === 2) {
-                window.location.href = "https://sites.google.com/view/cpiadestudytask/portugu%C3%AAs-3bimestre";
-            }
-
-            if (redacaoBtn.classList.contains('hidden')) {
-                redacaoBtn.classList.remove('hidden');
-                redacaoBtn.classList.add('slide-down');
-            }
-        });
-
-        document.getElementById('redacao-btn').addEventListener('click', function () {
-            window.location.href = "https://sites.google.com/view/cpiadestudytask/reda%C3%A7%C3%B5es-3bimestre";
-        });
-
-        document.querySelectorAll('.button').forEach(button => {
-            button.addEventListener('contextmenu', event => {
-                event.preventDefault();
-            });
-        });
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(registration => {
-                    console.log('ServiceWorker registrado com sucesso:', registration);
-                }).catch(error => {
-                    console.log('Falha ao registrar o ServiceWorker:', error);
-                });
-            });
-        }
-
-        function updateOnlineStatus() {
-            const offlineMessage = document.getElementById('offline-message');
-            const onlineMessage = document.getElementById('online-message');
-            const slowConnectionMessage = document.getElementById('slow-connection-message');
-            const hasShownOnlineMessage = localStorage.getItem('hasShownOnlineMessage');
-            const hasShownSlowConnectionMessage = localStorage.getItem('hasShownSlowConnectionMessage');
-
-            if (!navigator.onLine) {
-                offlineMessage.style.display = 'block';
-            } else {
-                offlineMessage.style.display = 'none';
-                if (!hasShownOnlineMessage) {
-                    onlineMessage.style.display = 'block';
-                    setTimeout(() => {
-                        onlineMessage.style.display = 'none';
-                        localStorage.setItem('hasShownOnlineMessage', 'true');
-                    }, 2000);
-                }
-
-                if (navigator.connection) {
-                    const {
-                        effectiveType
-                    } = navigator.connection;
-                    if ((effectiveType === '2g' || effectiveType === 'slow-2g') && !hasShownSlowConnectionMessage) {
-                        slowConnectionMessage.style.display = 'block';
-                        setTimeout(() => {
-                            slowConnectionMessage.style.display = 'none';
-                            localStorage.setItem('hasShownSlowConnectionMessage', 'true');
-                        }, 4000);
-                    }
-                }
-            }
-        }
-
-        function closeOfflineMessage() {
-            const offlineMessage = document.getElementById('offline-message');
-            offlineMessage.style.display = 'none';
-        }
-
-        function displayMessage(message) {
-            const notification = document.createElement('div');
-            notification.className = 'notification show';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.classList.remove('show');
-                document.body.removeChild(notification);
-            }, 3000);
-        }
-
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-
-        updateOnlineStatus();
-
-        // Script de Animação de Texto
-        const texts = [
-            "",
-            "Vamos Estudar?",
-            "Vamos inovar?",
-            "Vamos Criar?",
-            "Vamos Nos Dedicar?",
-            "StudyTask 🧑‍🎓"
-        ];
-
-        let index = 0;
-        const textElement = document.getElementById('text');
-
-        function typeText(text, callback) {
-            let i = 0;
-            const speed = 100;
-            function type() {
-                if (i < text.length) {
-                    textElement.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    setTimeout(callback, 1000);
-                }
-            }
-            type();
-        }
-
-        function deleteText(callback) {
-            const speed = 50;
-            function del() {
-                if (textElement.textContent.length > 0) {
-                    textElement.textContent = textElement.textContent.slice(0, -1);
-                    setTimeout(del, speed);
-                } else {
-                    setTimeout(callback, 300);
-                }
-            }
-            del();
-        }
-
-        function changeText() {
-            typeText(texts[index], () => {
-                if (texts[index] === "StudyTask 🧑‍🎓") {
-                    textElement.classList.add('no-animation');
-                    textElement.textContent = "StudyTask 🧑‍🎓";
-                    return;
-                }
-                deleteText(() => {
-                    index = (index + 1) % texts.length;
-                    changeText();
-                });
-            });
-        }
-
-        changeText();
-
-        // Adiciona evento de clique ao botão "Aluno Online"
-        document.getElementById('aluno-online-button').addEventListener('click', function(event) {
-            event.preventDefault();
-            this.classList.add('loading'); // Adiciona a classe para indicar carregamento
-            window.location.href = this.href; // Redireciona para o link
-        });
     </script>
 </body>
-
 </html>
