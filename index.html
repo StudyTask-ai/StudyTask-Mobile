@@ -14,38 +14,44 @@
             background-color: #8533f1;
             color: white;
             transition: background-color 0.3s, color 0.3s;
+            font-family: 'Arial', sans-serif;
         }
+        
+        /* Splash Screen */
         .splash-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: inherit; /* Utiliza a cor de fundo do body */
-            color: inherit; /* Utiliza a cor de texto do body */
             width: 100%;
             height: 100%;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 10000;
+            background-color: inherit;
+            color: inherit;
         }
+        
         .splash-text {
             font-size: 3em;
             font-weight: bold;
-            color: transparent; /* Removido fundo escuro */
             margin-bottom: 20px;
+            color: transparent;
             background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff2f2f, #ff7e5f, #2ecc71, #3498db);
-            background-size: 600% 600%; /* Aumenta a área de fundo para a animação */
+            background-size: 600% 600%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientAnimation 10s ease infinite; /* Animação de gradiente mais lenta */
+            animation: gradientAnimation 10s ease infinite;
             text-align: center;
         }
+        
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
         .progress-bar {
             width: 80%;
             height: 15px;
@@ -55,17 +61,15 @@
             margin-top: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
+        
         .progress {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, #3498db, #2980b9); /* Gradiente de azul */
-            animation: load 1s forwards;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            transition: width 3s;
         }
-        @keyframes load {
-            100% {
-                width: 100%;
-            }
-        }
+        
+        /* Main Content */
         .container {
             display: none;
             flex-direction: column;
@@ -77,6 +81,7 @@
             overflow-y: auto;
             height: 100vh;
         }
+        
         .buttons-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -85,9 +90,10 @@
             width: 100%;
             max-width: 800px;
         }
+        
         .button {
-            background-color: #ffffff; /* Cor normal dos botões */
-            color: #8533f1; /* Cor do texto dos botões */
+            background-color: #ffffff;
+            color: #8533f1;
             border: none;
             padding: 20px 40px;
             width: 100%;
@@ -104,20 +110,52 @@
             align-items: center;
             justify-content: center;
         }
+        
+        .button.small {
+            padding: 10px 20px;
+            font-size: 0.9em;
+        }
+        
+        .button.medium {
+            padding: 20px 40px;
+            font-size: 1.1em;
+        }
+        
+        .button.large {
+            padding: 30px 60px;
+            font-size: 1.3em;
+        }
+        
+        .button.narrow {
+            max-width: 150px;
+        }
+        
+        .button.normal {
+            max-width: 250px;
+        }
+        
+        .button.wide {
+            max-width: 350px;
+        }
+
         .button img {
             margin-right: 10px;
             width: 30px;
             height: 30px;
         }
+        
         .button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+        
+        /* Logo and Theme Icon */
         .logo {
             margin-bottom: 10px;
             width: 100px;
             height: 100px;
         }
+        
         .theme-icon {
             position: absolute;
             top: 20px;
@@ -126,33 +164,89 @@
             width: 40px;
             height: 40px;
         }
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 70px; /* Distância do ícone do tema */
-            cursor: pointer;
-            font-size: 1.5em;
-            color: white;
-            display: none; /* Inicialmente escondido */
-        }
+        
+        /* Theme Options */
         .theme-options {
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.95);
+            justify-content: flex-start;
+            background-color: rgba(0, 0, 0, 0.8);
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1002;
-            color: #333;
+            color: #fff;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 80%;
             max-width: 500px;
+            overflow-y: auto;
+            max-height: 80vh;
         }
+        
+        .color-slider {
+            display: flex;
+            overflow-x: auto;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        .color-slider input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .color-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-button {
+            align-self: flex-end;
+            font-size: 1em;
+            color: #fff;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .close-button:hover {
+            color: #ff7e5f;
+            transform: scale(1.1);
+        }
+        
+        .apply-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #8533f1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .apply-button:hover {
+            background-color: #6f29c6;
+            transform: translateY(-2px);
+        }
+        
         .theme-button {
             margin: 5px;
             border: none;
@@ -161,22 +255,27 @@
             font-size: 1em;
             font-weight: bold;
             border-radius: 8px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, background-color 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+        
         .theme-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: #444;
         }
 
-        /* Ajustes para dispositivos móveis */
         @media (max-width: 600px) {
             .splash-text {
                 font-size: 2em;
             }
             .logo {
-                width: 80px; /* Ajustado para 80px em telas menores */
-                height: 80px; /* Ajustado para 80px em telas menores */
+                width: 80px;
+                height: 80px;
             }
             .theme-icon {
                 width: 30px;
@@ -186,94 +285,110 @@
     </style>
 </head>
 <body>
-    <!-- Tela de carregamento -->
     <div class="splash-screen" id="splashScreen">
         <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
         <div class="splash-text">StudyTask</div>
-        <div>Carregando...</div>
+        <div>Carregando... <span id="progressPercent">0%</span></div>
         <div class="progress-bar">
-            <div class="progress"></div>
+            <div class="progress" id="progressBar"></div>
         </div>
     </div>
 
-    <!-- Conteúdo principal -->
     <div class="container" id="mainContent">
-        <!-- Ícone e Nome -->
         <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
-        <div class="splash-text">StudyTask</div> <!-- Manter estilo consistente -->
-
-        <!-- Botões de links -->
+        <div class="splash-text">StudyTask</div>
         <div class="buttons-wrapper">
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/PORTUGU-S-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/PORTUGU-S-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Português Ícone">
                 Português 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/Reda-es-portugu-s-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/Reda-es-portugu-s-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Redação Ícone">
                 Redação Português 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/INGL-S-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/INGL-S-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/INGL%C3%8AS.gif" alt="Inglês Ícone">
                 Inglês 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/MATEM-TICA-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/MATEM-TICA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/MATEM%C3%81TICA.gif?raw=true" alt="Matemática Ícone">
                 Matemática 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20DA%20NATUREZA.gif?raw=true" alt="Ciências da Natureza Ícone">
                 Ciências da Natureza 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/CIENCIAS-HUMANAS-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/CIENCIAS-HUMANAS-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20HUMANAS.gif?raw=true" alt="Ciências Humanas Ícone">
                 Ciências Humanas
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/EDUCA-O-F-SICA-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/EDUCA-O-F-SICA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/educa%C3%A7%C3%A3o%20f%C3%ADsica.gif?raw=true" alt="Educação Física Ícone">
                 Educação Física 3° Bimestre
             </button>
-            <button class="button" onclick="window.location.href='https://studytask-ai.github.io/Qualifica-o-Profissional-3-BIMESTRE-/'">
+            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/Qualifica-o-Profissional-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/qualifica%C3%A7%C3%A3o%20Profissional.gif?raw=true" alt="Qualificação Profissional Ícone">
                 Qualificação Profissional 3° Bimestre
             </button>
         </div>
 
-        <!-- Ícone de tema -->
         <img src="https://cdn-icons-png.flaticon.com/128/15414/15414401.png" alt="Mudar Tema" class="theme-icon" onclick="toggleThemeOptions()">
-        <span class="close-button" id="closeButton" onclick="toggleThemeOptions()">X</span> <!-- Botão de fechar -->
     </div>
 
-    <!-- Modal de opções de tema -->
     <div class="theme-options" id="themeOptions">
-        <h2>Escolha um Tema</h2>
-        <button class="theme-button" style="background-color: #000000; color: #ffffff;" onclick="setTheme('#000000', '#ffffff')">Preto e Branco</button>
-        <button class="theme-button" style="background-color: #333333; color: #ffffff;" onclick="setTheme('#333333', '#ffffff')">Cinza Escuro</button>
-        <button class="theme-button" style="background-color: #8533f1; color: #ffffff;" onclick="setTheme('#8533f1', '#ffffff')">Roxo</button>
-        <button class="theme-button" style="background-color: #AD7DEC; color: #ffffff;" onclick="setTheme('#AD7DEC', '#ffffff')">Lilás</button>
-        <button class="theme-button" style="background-color: #ff7e5f; color: #ffffff;" onclick="setTheme('#ff7e5f', '#ffffff')">Laranja</button>
-        <button class="theme-button" style="background-color: #3498db; color: #ffffff;" onclick="setTheme('#3498db', '#ffffff')">Azul</button>
-        <button class="theme-button" style="background-color: #2ecc71; color: #ffffff;" onclick="setTheme('#2ecc71', '#ffffff')">Verde Claro</button>
-        <button class="theme-button" style="background-color: #ffffff; color: #000000;" onclick="setTheme('#ffffff', '#000000')">Branco e Preto</button>
+        <button class="close-button" onclick="toggleThemeOptions()">Fechar Configurações</button>
+        <div class="config-section">
+            <h2>Personalizar Tema</h2>
+            <div class="color-slider">
+                <input type="range" min="0" max="360" value="0" id="hueRange">
+            </div>
+            <button class="apply-button" onclick="applyHueColor()">Aplicar Cor Personalizada</button>
+            <button class="apply-button" onclick="activateExtremeBlack()">Ativar Tema Extremamente Preto</button>
+        </div>
+        
+        <div class="config-section">
+            <h2>Configurações de Tamanho dos Botões</h2>
+            <button class="theme-button" onclick="setButtonSize('small')">Pequeno</button>
+            <button class="theme-button" onclick="setButtonSize('medium')">Médio</button>
+            <button class="theme-button" onclick="setButtonSize('large')">Grande</button>
+        </div>
+
+        <div class="config-section">
+            <h2>Configurações de Largura dos Botões</h2>
+            <button class="theme-button" onclick="setButtonWidth('narrow')">Estreito</button>
+            <button class="theme-button" onclick="setButtonWidth('normal')">Normal</button>
+            <button class="theme-button" onclick="setButtonWidth('wide')">Largo</button>
+        </div>
     </div>
 
     <script>
         const themeOptions = document.getElementById('themeOptions');
         const splashScreen = document.getElementById('splashScreen');
         const mainContent = document.getElementById('mainContent');
-        const closeButton = document.getElementById('closeButton');
+        const progressBar = document.getElementById('progressBar');
+        const progressPercent = document.getElementById('progressPercent');
+        const hueRange = document.getElementById('hueRange');
 
-        // Mostrar ou ocultar opções de tema
         function toggleThemeOptions() {
-            if (themeOptions.style.display === 'flex') {
-                themeOptions.style.display = 'none';
-                closeButton.style.display = 'none'; // Ocultar botão de fechar
-            } else {
-                themeOptions.style.display = 'flex';
-                closeButton.style.display = 'inline'; // Mostrar botão de fechar
-            }
+            themeOptions.style.display = themeOptions.style.display === 'flex' ? 'none' : 'flex';
+            document.body.style.overflow = themeOptions.style.display === 'flex' ? 'hidden' : 'auto';
         }
 
-        // Definir tema e salvar no localStorage
+        function applyHueColor() {
+            const hueValue = hueRange.value;
+            const bgColor = `hsl(${hueValue}, 100%, 50%)`;
+            const textColor = `hsl(${hueValue}, 100%, 20%)`;
+            setTheme(bgColor, textColor);
+        }
+
+        function activateExtremeBlack() {
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.style.color = '#8533f1'; // Define a cor do texto dos botões como roxo
+            });
+            setTheme('#000000', '#8533f1'); // Fundo preto e texto roxo
+        }
+
         function setTheme(bgColor, textColor) {
             document.body.style.backgroundColor = bgColor;
             document.body.style.color = textColor;
@@ -281,14 +396,30 @@
             splashScreen.style.color = textColor;
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(button => {
-                button.style.backgroundColor = '#ffffff'; // Cor normal dos botões
-                button.style.color = '#8533f1'; // Cor do texto dos botões
+                button.style.backgroundColor = '#ffffff';
+                button.style.color = textColor;
             });
-            // Salvar tema no localStorage
             localStorage.setItem('theme', JSON.stringify({ bgColor, textColor }));
         }
 
-        // Aplicar tema armazenado
+        function setButtonSize(size) {
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.classList.remove('small', 'medium', 'large');
+                button.classList.add(size);
+            });
+            localStorage.setItem('buttonSize', size);
+        }
+
+        function setButtonWidth(width) {
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.classList.remove('narrow', 'normal', 'wide');
+                button.classList.add(width);
+            });
+            localStorage.setItem('buttonWidth', width);
+        }
+
         function applyStoredTheme() {
             const storedTheme = localStorage.getItem('theme');
             if (storedTheme) {
@@ -297,18 +428,45 @@
             }
         }
 
-        // Função para ocultar a tela de carregamento e mostrar o conteúdo principal
+        function applyStoredButtonSize() {
+            const storedSize = localStorage.getItem('buttonSize');
+            if (storedSize) {
+                setButtonSize(storedSize);
+            }
+        }
+
+        function applyStoredButtonWidth() {
+            const storedWidth = localStorage.getItem('buttonWidth');
+            if (storedWidth) {
+                setButtonWidth(storedWidth);
+            }
+        }
+
+        function updateProgressBar() {
+            let percentage = 0;
+            progressBar.style.width = '100%';
+            const interval = setInterval(() => {
+                percentage += 1;
+                progressPercent.textContent = `${percentage}%`;
+                if (percentage >= 100) {
+                    clearInterval(interval);
+                    showMainContent();
+                }
+            }, 30); // 30ms * 100 = 3000ms (3 seconds)
+        }
+
+        window.onload = () => {
+            applyStoredTheme();
+            applyStoredButtonSize();
+            applyStoredButtonWidth();
+            updateProgressBar();
+        };
+
         function showMainContent() {
             splashScreen.style.display = 'none';
             mainContent.style.display = 'flex';
-            document.body.style.overflowY = 'auto'; // Habilitar rolagem
+            document.body.style.overflowY = 'auto';
         }
-
-        // Aplicar tema armazenado ao carregar a página
-        window.onload = () => {
-            applyStoredTheme();
-            setTimeout(showMainContent, 1000); // Mostrar conteúdo após 1 segundo
-        };
     </script>
 </body>
 </html>
