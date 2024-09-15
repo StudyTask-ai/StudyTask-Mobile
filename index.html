@@ -298,35 +298,35 @@
         <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
         <div class="splash-text">StudyTask</div>
         <div class="buttons-wrapper">
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/PORTUGU-S-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/PORTUGU-S-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Português Ícone">
                 Português 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/Reda-es-portugu-s-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/Reda-es-portugu-s-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/PORTUGU%C3%8AS.gif" alt="Redação Ícone">
                 Redação Português 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/INGL-S-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/INGL-S-3-BIMESTRE-/'">
                 <img src="https://raw.githubusercontent.com/StudyTask-ai/Esse-cone-o-de-/main/INGL%C3%8AS.gif" alt="Inglês Ícone">
                 Inglês 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/MATEM-TICA-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/MATEM-TICA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/MATEM%C3%81TICA.gif?raw=true" alt="Matemática Ícone">
                 Matemática 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20DA%20NATUREZA.gif?raw=true" alt="Ciências da Natureza Ícone">
                 Ciências da Natureza 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/CIENCIAS-HUMANAS-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/CIENCIAS-HUMANAS-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/CI%C3%8ANCIAS%20HUMANAS.gif?raw=true" alt="Ciências Humanas Ícone">
                 Ciências Humanas
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/EDUCA-O-F-SICA-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/EDUCA-O-F-SICA-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/educa%C3%A7%C3%A3o%20f%C3%ADsica.gif?raw=true" alt="Educação Física Ícone">
                 Educação Física 3° Bimestre
             </button>
-            <button class="button medium normal" onclick="window.location.href='https://studytask-ai.github.io/Qualifica-o-Profissional-3-BIMESTRE-/'">
+            <button class="button large wide" onclick="window.location.href='https://studytask-ai.github.io/Qualifica-o-Profissional-3-BIMESTRE-/'">
                 <img src="https://github.com/StudyTask-ai/Esse-cone-o-de-/blob/main/qualifica%C3%A7%C3%A3o%20Profissional.gif?raw=true" alt="Qualificação Profissional Ícone">
                 Qualificação Profissional 3° Bimestre
             </button>
@@ -428,17 +428,13 @@
         }
 
         function applyStoredButtonSize() {
-            const storedSize = localStorage.getItem('buttonSize');
-            if (storedSize) {
-                setButtonSize(storedSize);
-            }
+            const storedSize = localStorage.getItem('buttonSize') || 'large'; // Define 'large' como padrão
+            setButtonSize(storedSize);
         }
 
         function applyStoredButtonWidth() {
-            const storedWidth = localStorage.getItem('buttonWidth');
-            if (storedWidth) {
-                setButtonWidth(storedWidth);
-            }
+            const storedWidth = localStorage.getItem('buttonWidth') || 'wide'; // Define 'wide' como padrão
+            setButtonWidth(storedWidth);
         }
 
         function updateProgressBar() {
