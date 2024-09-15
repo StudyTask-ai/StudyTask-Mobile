@@ -342,7 +342,6 @@
             <div class="color-slider">
                 <input type="range" min="0" max="360" value="0" id="hueRange">
             </div>
-            <button class="apply-button" onclick="applyHueColor()">Aplicar Cor Personalizada</button>
             <button class="apply-button" onclick="activateExtremeBlack()">Ativar Tema Extremamente Preto</button>
         </div>
         
@@ -374,12 +373,12 @@
             document.body.style.overflow = themeOptions.style.display === 'flex' ? 'hidden' : 'auto';
         }
 
-        function applyHueColor() {
+        hueRange.addEventListener('input', () => {
             const hueValue = hueRange.value;
             const bgColor = `hsl(${hueValue}, 100%, 50%)`;
             const textColor = `hsl(${hueValue}, 100%, 20%)`;
             setTheme(bgColor, textColor);
-        }
+        });
 
         function activateExtremeBlack() {
             const buttons = document.querySelectorAll('.button');
