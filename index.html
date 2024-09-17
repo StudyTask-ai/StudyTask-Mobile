@@ -269,6 +269,20 @@
             background-color: #444;
         }
 
+        /* Offline Message */
+        .offline-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10001;
+        }
+
         @media (max-width: 600px) {
             .splash-text {
                 font-size: 2em;
@@ -285,6 +299,8 @@
     </style>
 </head>
 <body>
+    <div class="offline-message" id="offlineMessage">Você está offline. Algumas funcionalidades não estarão disponíveis.</div>
+
     <div class="splash-screen" id="splashScreen">
         <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="Ícone" class="logo">
         <div class="splash-text">StudyTask</div>
@@ -367,6 +383,7 @@
         const progressBar = document.getElementById('progressBar');
         const progressPercent = document.getElementById('progressPercent');
         const hueRange = document.getElementById('hueRange');
+        const offlineMessage = document.getElementById('offlineMessage');
 
         function toggleThemeOptions() {
             themeOptions.style.display = themeOptions.style.display === 'flex' ? 'none' : 'flex';
@@ -455,12 +472,40 @@
             applyStoredButtonSize();
             applyStoredButtonWidth();
             updateProgressBar();
+            checkConnectionStatus();
+            registerServiceWorker();
         };
 
         function showMainContent() {
             splashScreen.style.display = 'none';
             mainContent.style.display = 'flex';
             document.body.style.overflowY = 'auto';
+        }
+
+        function checkConnectionStatus() {
+            if (!navigator.onLine) {
+                offlineMessage.style.display = 'block';
+            } else {
+                offlineMessage.style.display = 'none';
+            }
+
+            window.addEventListener('online', () => {
+                offlineMessage.style.display = 'none';
+            });
+
+            window.addEventListener('offline', () => {
+                offlineMessage.style.display = 'block';
+            });
+        }
+
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('Service Worker registrado com sucesso:', registration);
+                }).catch(error => {
+                    console.log('Falha ao registrar o Service Worker:', error);
+                });
+            }
         }
     </script>
 </body>
