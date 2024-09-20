@@ -38,8 +38,8 @@
             font-weight: bold;
             margin-bottom: 20px;
             color: transparent;
-            background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff2f2f, #ff7e5f, #2ecc71, #3498db);
-            background-size: 600% 600%;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b, #ff2f2f, #ff7e5f, #2ecc71, #3498db, #8e44ad, #f39c12);
+            background-size: 800% 800%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientAnimation 10s ease infinite;
@@ -93,7 +93,7 @@
         
         .button {
             background-color: #ffffff;
-            color: #8533f1;
+            color: #8533f1; /* Cor das letras alterada para roxo */
             border: none;
             padding: 20px 40px;
             width: 100%;
@@ -359,6 +359,14 @@
                 <input type="range" min="0" max="360" value="0" id="hueRange">
             </div>
             <button class="apply-button" onclick="activateExtremeBlack()">Ativar Tema Extremamente Preto</button>
+            <div class="themes-list">
+                <button class="theme-button" onclick="setTheme('#000000', '#ffffff')">Preto Total</button>
+                <button class="theme-button" onclick="setTheme('#1a1a1a', '#e6e6e6')">Preto Fosco</button>
+                <button class="theme-button" onclick="setTheme('#2b2b2b', '#d4d4d4')">Preto Clássico</button>
+                <button class="theme-button" onclick="setTheme('#333333', '#cccccc')">Preto Metálico</button>
+                <button class="theme-button" onclick="setTheme('#3d3d3d', '#bfbfbf')">Preto Carbônico</button>
+                <button class="theme-button" onclick="setTheme('#454545', '#b0b0b0')">Preto Aço</button>
+            </div>
         </div>
         
         <div class="config-section">
@@ -407,10 +415,10 @@
             splashScreen.style.backgroundColor = bgColor;
             splashScreen.style.color = textColor;
             const buttons = document.querySelectorAll('.button');
-            const buttonTextColor = (bgColor === '#000000') ? '#ffffff' : textColor; // Branco para fundo preto
+            const buttonTextColor = '#8533f1'; // Cor das letras dos botões
             buttons.forEach(button => {
                 button.style.backgroundColor = '#ffffff'; // Mantém o fundo dos botões branco
-                button.style.color = buttonTextColor; // Define a cor do texto com base no contraste
+                button.style.color = buttonTextColor; // Define a cor do texto para um tom de roxo
             });
             localStorage.setItem('theme', JSON.stringify({ bgColor, textColor }));
         }
