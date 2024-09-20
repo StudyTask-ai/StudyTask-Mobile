@@ -104,7 +104,7 @@
             font-weight: bold;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -398,11 +398,7 @@
         });
 
         function activateExtremeBlack() {
-            const buttons = document.querySelectorAll('.button');
-            buttons.forEach(button => {
-                button.style.color = '#8533f1'; // Define a cor do texto dos botões como roxo
-            });
-            setTheme('#000000', '#8533f1'); // Fundo preto e texto roxo
+            setTheme('#000000', '#ffffff'); // Fundo preto e texto branco para melhor contraste
         }
 
         function setTheme(bgColor, textColor) {
@@ -411,9 +407,10 @@
             splashScreen.style.backgroundColor = bgColor;
             splashScreen.style.color = textColor;
             const buttons = document.querySelectorAll('.button');
+            const buttonTextColor = (bgColor === '#000000') ? '#ffffff' : textColor; // Branco para fundo preto
             buttons.forEach(button => {
-                button.style.backgroundColor = '#ffffff';
-                button.style.color = textColor;
+                button.style.backgroundColor = '#ffffff'; // Mantém o fundo dos botões branco
+                button.style.color = buttonTextColor; // Define a cor do texto com base no contraste
             });
             localStorage.setItem('theme', JSON.stringify({ bgColor, textColor }));
         }
