@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTask</title>
+    <style>
+        :root {
+            --body-bg-color: #fff;
+            --body-color: #333;
+            --button-bg-color: #8533f1;
+            --button-hover-bg-color: #7209b7;
+            --button-padding: 1em 1.5em;
+            --post-bg-color: #fff;
+            --container-bg-color: #f9f9f9;
+            --post-border-color: #ddd;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--body-bg-color);
+            color: var(--body-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .container {
+            text-align: center;
+            background: var(--container-bg-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .icon {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 18px;
+            margin: 20px 0;
+            color: var(--body-color);
+        }
+        .button {
+            background-color: var(--button-bg-color);
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/Luanzinh0fc/Luanzinh0fc-Banco-de-dados-p-blicos/main/1000008714-removebg.png" alt="StudyTask Icon" class="icon">
+        <div class="message">
+            Ainda não temos atividades de Educação física disponíveis no momento.<br>
+            Estamos começando ainda no IV Bimestre para acompanhar as matérias do terceiro bimestre.<br>
+            Clique neste botão abaixo:
+        </div>
+        <a href="https://studytask-ai.github.io/Acompanhamento-do-3-BIMESTRE-/" class="button">Acompanhar</a>
+        <button onclick="toggleTheme()" class="button" style="margin-top: 20px;">Trocar Tema</button>
+    </div>
+
+    <script>
+        const themes = [
+            {
+                bodyBackgroundColor: '#000000',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#333333',
+                buttonHoverBackgroundColor: '#555555',
+                containerBackgroundColor: '#666666',
+                postBorderColor: '#333333',
+            },
+            {
+                bodyBackgroundColor: '#FF5733',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#C70039',
+                buttonHoverBackgroundColor: '#900C3F',
+                containerBackgroundColor: '#DAF7A6',
+                postBorderColor: '#FF5733',
+            },
+            {
+                bodyBackgroundColor: '#581845',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#900C3F',
+                buttonHoverBackgroundColor: '#C70039',
+                containerBackgroundColor: '#FF5733',
+                postBorderColor: '#C70039',
+            },
+            {
+                bodyBackgroundColor: '#1D8348',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#239B56',
+                buttonHoverBackgroundColor: '#28B463',
+                containerBackgroundColor: '#ABEBC6',
+                postBorderColor: '#239B56',
+            },
+            {
+                bodyBackgroundColor: '#154360',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#1A5276',
+                buttonHoverBackgroundColor: '#21618C',
+                containerBackgroundColor: '#85C1E9',
+                postBorderColor: '#1A5276',
+            },
+            {
+                bodyBackgroundColor: '#7D3C98',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#8E44AD',
+                buttonHoverBackgroundColor: '#9B59B6',
+                containerBackgroundColor: '#E8DAEF',
+                postBorderColor: '#8E44AD',
+            },
+            {
+                bodyBackgroundColor: '#B03A2E',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#E74C3C',
+                buttonHoverBackgroundColor: '#CD6155',
+                containerBackgroundColor: '#FADBD8',
+                postBorderColor: '#E74C3C',
+            },
+            {
+                bodyBackgroundColor: '#1B2631',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#212F3D',
+                buttonHoverBackgroundColor: '#283747',
+                containerBackgroundColor: '#85929E',
+                postBorderColor: '#212F3D',
+            },
+            {
+                bodyBackgroundColor: '#2E4053',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#34495E',
+                buttonHoverBackgroundColor: '#5D6D7E',
+                containerBackgroundColor: '#D5DBDB',
+                postBorderColor: '#34495E',
+            },
+            {
+                bodyBackgroundColor: '#7E5109',
+                bodyColor: '#FFFFFF',
+                buttonBackgroundColor: '#935116',
+                buttonHoverBackgroundColor: '#A04000',
+                containerBackgroundColor: '#E6B0AA',
+                postBorderColor: '#935116',
+            }
+        ];
+
+        let currentThemeIndex = localStorage.getItem('themeIndex') || 0;
+
+        function applyTheme(index) {
+            const theme = themes[index];
+            document.documentElement.style.setProperty('--body-bg-color', theme.bodyBackgroundColor);
+            document.documentElement.style.setProperty('--body-color', theme.bodyColor);
+            document.documentElement.style.setProperty('--button-bg-color', theme.buttonBackgroundColor);
+            document.documentElement.style.setProperty('--button-hover-bg-color', theme.buttonHoverBackgroundColor);
+            document.documentElement.style.setProperty('--container-bg-color', theme.containerBackgroundColor);
+            document.documentElement.style.setProperty('--post-border-color', theme.postBorderColor);
+            localStorage.setItem('themeIndex', index);
+        }
+
+        function toggleTheme() {
+            currentThemeIndex = (parseInt(currentThemeIndex) + 1) % themes.length;
+            applyTheme(currentThemeIndex);
+        }
+
+        applyTheme(currentThemeIndex);
+    </script>
+</body>
+</html>
