@@ -103,6 +103,21 @@
             border-radius: 10px;
             background: var(--post-bg-color);
         }
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
         .bottom-container {
             display: flex;
             flex-direction: column;
@@ -243,7 +258,10 @@
     </header>
     <div class="container">
         <div class="post">
-            <p>Seja bem-vindo ao IV bimestre! Prepare-se para uma fase de ótimos estudos e novas tarefas que vão te desafiar e fazer você crescer ainda mais. Agora, com uma interface aprimorada no StudyTask, sua jornada acadêmica ficou ainda mais eficiente e agradável. Vamos juntos nessa reta final!</p>
+            <!-- Contêiner responsivo para o vídeo -->
+            <div class="video-responsive">
+                <iframe src="https://www.youtube.com/embed/s4a4Z3Svljg" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
         <div class="bottom-container">
             <div class="buttons">
@@ -489,7 +507,19 @@
 
         const shareButton = document.querySelector('.share-button');
         shareButton.addEventListener('click', () => {
-            alert('Publicação compartilhada!');
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Portal do Governo Federal',
+                    text: 'Saiba mais informações no Portal do Governo Federal',
+                    url: 'https://www.gov.br/',
+                }).then(() => {
+                    console.log('Compartilhamento bem-sucedido');
+                }).catch((error) => {
+                    console.error('Erro ao compartilhar', error);
+                });
+            } else {
+                console.error('Compartilhamento não suportado');
+            }
         });
 
         // Navegação entre disciplinas
