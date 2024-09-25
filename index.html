@@ -29,12 +29,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.7);
+            opacity: 1;
             transition: opacity 0.5s;
         }
         #loading-icon {
@@ -258,7 +259,6 @@
     </header>
     <div class="container">
         <div class="post">
-            <!-- Contêiner responsivo para o vídeo -->
             <div class="video-responsive">
                 <iframe src="https://www.youtube.com/embed/s4a4Z3Svljg" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -311,7 +311,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div id="likeModal" class="modal">
         <div class="modal-content">
             <p>Obrigado por curtir esta publicação!</p>
@@ -320,10 +319,9 @@
     </div>
 
     <script>
-        // Definição de temas, incluindo o tema preto como padrão
         const strongThemes = [
             {
-                bodyBackgroundColor: '#000000', // Preto
+                bodyBackgroundColor: '#000000',
                 bodyColor: '#FFFFFF',
                 buttonBackgroundColor: '#333333',
                 buttonHoverBackgroundColor: '#555555',
@@ -333,7 +331,7 @@
                 postBorderColor: '#333333',
             },
             {
-                bodyBackgroundColor: '#FF5733', // Vermelho forte
+                bodyBackgroundColor: '#FF5733',
                 bodyColor: '#FFFFFF',
                 buttonBackgroundColor: '#C70039',
                 buttonHoverBackgroundColor: '#900C3F',
@@ -341,90 +339,10 @@
                 postBackgroundColor: '#FFC300',
                 containerBackgroundColor: '#DAF7A6',
                 postBorderColor: '#FF5733',
-            },
-            {
-                bodyBackgroundColor: '#581845', // Roxo escuro
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#900C3F',
-                buttonHoverBackgroundColor: '#C70039',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#FFC300',
-                containerBackgroundColor: '#FF5733',
-                postBorderColor: '#C70039',
-            },
-            {
-                bodyBackgroundColor: '#1D8348', // Verde forte
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#239B56',
-                buttonHoverBackgroundColor: '#28B463',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#82E0AA',
-                containerBackgroundColor: '#ABEBC6',
-                postBorderColor: '#239B56',
-            },
-            {
-                bodyBackgroundColor: '#154360', // Azul escuro
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#1A5276',
-                buttonHoverBackgroundColor: '#21618C',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#5DADE2',
-                containerBackgroundColor: '#85C1E9',
-                postBorderColor: '#1A5276',
-            },
-            {
-                bodyBackgroundColor: '#7D3C98', // Roxo claro
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#8E44AD',
-                buttonHoverBackgroundColor: '#9B59B6',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#D2B4DE',
-                containerBackgroundColor: '#E8DAEF',
-                postBorderColor: '#8E44AD',
-            },
-            {
-                bodyBackgroundColor: '#B03A2E', // Vermelho escuro
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#E74C3C',
-                buttonHoverBackgroundColor: '#CD6155',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#F5B7B1',
-                containerBackgroundColor: '#FADBD8',
-                postBorderColor: '#E74C3C',
-            },
-            {
-                bodyBackgroundColor: '#1B2631', // Preto azulado
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#212F3D',
-                buttonHoverBackgroundColor: '#283747',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#5D6D7E',
-                containerBackgroundColor: '#85929E',
-                postBorderColor: '#212F3D',
-            },
-            {
-                bodyBackgroundColor: '#2E4053', // Azul petróleo
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#34495E',
-                buttonHoverBackgroundColor: '#5D6D7E',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#AEB6BF',
-                containerBackgroundColor: '#D5DBDB',
-                postBorderColor: '#34495E',
-            },
-            {
-                bodyBackgroundColor: '#7E5109', // Marrom escuro
-                bodyColor: '#FFFFFF',
-                buttonBackgroundColor: '#935116',
-                buttonHoverBackgroundColor: '#A04000',
-                buttonPadding: '12px 18px',
-                postBackgroundColor: '#D98880',
-                containerBackgroundColor: '#E6B0AA',
-                postBorderColor: '#935116',
             }
+            // Adicione mais temas conforme necessário
         ];
 
-        // Define o índice do tema padrão (preto) como 0
         let currentThemeIndex = localStorage.getItem('themeIndex') || 0;
 
         function applyTheme(index) {
@@ -447,13 +365,7 @@
 
         document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
         
-        // Aplica o tema inicial (preto como padrão)
         applyTheme(currentThemeIndex);
-
-        // Simulação de tela de carregamento
-        window.onload = function() {
-            hideLoadingScreen();
-        }
 
         function showLoadingScreen() {
             const loadingScreen = document.getElementById('loading-screen');
@@ -485,7 +397,10 @@
             }, 500);
         }
 
-        // Funcionalidades dos botões Curtir e Compartilhar
+        window.addEventListener('load', () => {
+            showLoadingScreen();
+        });
+
         const likeButton = document.querySelector('.like-button');
         const likeModal = document.getElementById('likeModal');
         const closeModal = document.querySelector('.close-btn');
@@ -522,7 +437,6 @@
             }
         });
 
-        // Navegação entre disciplinas
         document.querySelectorAll('.subject').forEach(subject => {
             subject.addEventListener('click', () => {
                 showLoadingScreen();
