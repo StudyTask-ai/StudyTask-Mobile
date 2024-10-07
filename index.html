@@ -14,6 +14,7 @@
             --post-bg-color: #fff;
             --container-bg-color: #f9f9f9;
             --post-border-color: #ddd;
+            transition: background-color 0.2s, color 0.2s;
         }
         body {
             font-family: 'Arial', sans-serif;
@@ -21,7 +22,6 @@
             padding: 0;
             background-color: var(--body-bg-color);
             color: var(--body-color);
-            transition: background 0.3s, color 0.3s;
         }
         header {
             padding: 20px;
@@ -381,50 +381,10 @@
             { bodyBackgroundColor: '#FBE9E7', bodyColor: '#BF360C', buttonBackgroundColor: '#FF5722', buttonHoverBackgroundColor: '#FFCCBC', buttonPadding: '12px 18px', postBackgroundColor: '#FBE9E7', containerBackgroundColor: '#FFCCBC', postBorderColor: '#FFAB91' },
             { bodyBackgroundColor: '#ECEFF1', bodyColor: '#263238', buttonBackgroundColor: '#607D8B', buttonHoverBackgroundColor: '#CFD8DC', buttonPadding: '12px 18px', postBackgroundColor: '#ECEFF1', containerBackgroundColor: '#B0BEC5', postBorderColor: '#90A4AE' },
             { bodyBackgroundColor: '#FFFDE7', bodyColor: '#F57F17', buttonBackgroundColor: '#FBC02D', buttonHoverBackgroundColor: '#FFF9C4', buttonPadding: '12px 18px', postBackgroundColor: '#FFFDE7', containerBackgroundColor: '#FFF59D', postBorderColor: '#FFF176' },
-            { bodyBackgroundColor: '#E1F5FE', bodyColor: '#01579B', buttonBackgroundColor: '#03A9F4', buttonHoverBackgroundColor: '#B3E5FC', buttonPadding: '12px 18px', postBackgroundColor: '#E1F5FE', containerBackgroundColor: '#B3E5FC', postBorderColor: '#81D4FA' },
-            { bodyBackgroundColor: '#F9FBE7', bodyColor: '#827717', buttonBackgroundColor: '#CDDC39', buttonHoverBackgroundColor: '#F0F4C3', buttonPadding: '12px 18px', postBackgroundColor: '#F9FBE7', containerBackgroundColor: '#F0F4C3', postBorderColor: '#E6EE9C' },
-            { bodyBackgroundColor: '#FCE4EC', bodyColor: '#880E4F', buttonBackgroundColor: '#E91E63', buttonHoverBackgroundColor: '#F8BBD0', buttonPadding: '12px 18px', postBackgroundColor: '#FCE4EC', containerBackgroundColor: '#F8BBD0', postBorderColor: '#F48FB1' },
-            { bodyBackgroundColor: '#E8F5E9', bodyColor: '#2E7D32', buttonBackgroundColor: '#66BB6A', buttonHoverBackgroundColor: '#C8E6C9', buttonPadding: '12px 18px', postBackgroundColor: '#E8F5E9', containerBackgroundColor: '#A5D6A7', postBorderColor: '#81C784' },
-            { bodyBackgroundColor: '#F3E5F5', bodyColor: '#7B1FA2', buttonBackgroundColor: '#AB47BC', buttonHoverBackgroundColor: '#E1BEE7', buttonPadding: '12px 18px', postBackgroundColor: '#F3E5F5', containerBackgroundColor: '#BA68C8', postBorderColor: '#CE93D8' },
-            { bodyBackgroundColor: '#E0F2F1', bodyColor: '#004D40', buttonBackgroundColor: '#26A69A', buttonHoverBackgroundColor: '#B2DFDB', buttonPadding: '12px 18px', postBackgroundColor: '#E0F2F1', containerBackgroundColor: '#80CBC4', postBorderColor: '#4DB6AC' },
-            { bodyBackgroundColor: '#F1F8E9', bodyColor: '#33691E', buttonBackgroundColor: '#8BC34A', buttonHoverBackgroundColor: '#DCEDC8', buttonPadding: '12px 18px', postBackgroundColor: '#F1F8E9', containerBackgroundColor: '#AED581', postBorderColor: '#C5E1A5' },
-            { bodyBackgroundColor: '#FFF3E0', bodyColor: '#E65100', buttonBackgroundColor: '#FF9800', buttonHoverBackgroundColor: '#FFE0B2', buttonPadding: '12px 18px', postBackgroundColor: '#FFF3E0', containerBackgroundColor: '#FFCC80', postBorderColor: '#FFB74D' },
-            { bodyBackgroundColor: '#EDE7F6', bodyColor: '#311B92', buttonBackgroundColor: '#673AB7', buttonHoverBackgroundColor: '#D1C4E9', buttonPadding: '12px 18px', postBackgroundColor: '#EDE7F6', containerBackgroundColor: '#B39DDB', postBorderColor: '#9575CD' },
-            { bodyBackgroundColor: '#F3E5F5', bodyColor: '#6A1B9A', buttonBackgroundColor: '#8E24AA', buttonHoverBackgroundColor: '#E1BEE7', buttonPadding: '12px 18px', postBackgroundColor: '#F3E5F5', containerBackgroundColor: '#CE93D8', postBorderColor: '#BA68C8' },
-            { bodyBackgroundColor: '#FFFDE7', bodyColor: '#F57F17', buttonBackgroundColor: '#FFEB3B', buttonHoverBackgroundColor: '#FFF9C4', buttonPadding: '12px 18px', postBackgroundColor: '#FFFDE7', containerBackgroundColor: '#FFF59D', postBorderColor: '#FFEE58' },
-            { bodyBackgroundColor: '#F1F8E9', bodyColor: '#558B2F', buttonBackgroundColor: '#9CCC65', buttonHoverBackgroundColor: '#DCEDC8', buttonPadding: '12px 18px', postBackgroundColor: '#F1F8E9', containerBackgroundColor: '#AED581', postBorderColor: '#C5E1A5' },
-            { bodyBackgroundColor: '#E3F2FD', bodyColor: '#0D47A1', buttonBackgroundColor: '#2196F3', buttonHoverBackgroundColor: '#BBDEFB', buttonPadding: '12px 18px', postBackgroundColor: '#E3F2FD', containerBackgroundColor: '#90CAF9', postBorderColor: '#64B5F6' },
-            { bodyBackgroundColor: '#FFEBEE', bodyColor: '#B71C1C', buttonBackgroundColor: '#F44336', buttonHoverBackgroundColor: '#FFCDD2', buttonPadding: '12px 18px', postBackgroundColor: '#FFEBEE', containerBackgroundColor: '#EF9A9A', postBorderColor: '#E57373' },
-            { bodyBackgroundColor: '#E8F5E9', bodyColor: '#1B5E20', buttonBackgroundColor: '#4CAF50', buttonHoverBackgroundColor: '#C8E6C9', buttonPadding: '12px 18px', postBackgroundColor: '#E8F5E9', containerBackgroundColor: '#A5D6A7', postBorderColor: '#81C784' },
-            { bodyBackgroundColor: '#FCE4EC', bodyColor: '#880E4F', buttonBackgroundColor: '#EC407A', buttonHoverBackgroundColor: '#F8BBD0', buttonPadding: '12px 18px', postBackgroundColor: '#FCE4EC', containerBackgroundColor: '#F48FB1', postBorderColor: '#F06292' },
-            { bodyBackgroundColor: '#E1F5FE', bodyColor: '#01579B', buttonBackgroundColor: '#0288D1', buttonHoverBackgroundColor: '#B3E5FC', buttonPadding: '12px 18px', postBackgroundColor: '#E1F5FE', containerBackgroundColor: '#81D4FA', postBorderColor: '#4FC3F7' },
-            { bodyBackgroundColor: '#FFF3E0', bodyColor: '#E65100', buttonBackgroundColor: '#FF9800', buttonHoverBackgroundColor: '#FFE0B2', buttonPadding: '12px 18px', postBackgroundColor: '#FFF3E0', containerBackgroundColor: '#FFCC80', postBorderColor: '#FFB74D' },
-            { bodyBackgroundColor: '#F9FBE7', bodyColor: '#827717', buttonBackgroundColor: '#CDDC39', buttonHoverBackgroundColor: '#F0F4C3', buttonPadding: '12px 18px', postBackgroundColor: '#F9FBE7', containerBackgroundColor: '#E6EE9C', postBorderColor: '#DCE775' },
-            { bodyBackgroundColor: '#ECEFF1', bodyColor: '#263238', buttonBackgroundColor: '#607D8B', buttonHoverBackgroundColor: '#CFD8DC', buttonPadding: '12px 18px', postBackgroundColor: '#ECEFF1', containerBackgroundColor: '#B0BEC5', postBorderColor: '#90A4AE' },
-            { bodyBackgroundColor: '#E0F7FA', bodyColor: '#006064', buttonBackgroundColor: '#00ACC1', buttonHoverBackgroundColor: '#B2EBF2', buttonPadding: '12px 18px', postBackgroundColor: '#E0F7FA', containerBackgroundColor: '#80DEEA', postBorderColor: '#4DD0E1' },
-            { bodyBackgroundColor: '#F3E5F5', bodyColor: '#6A1B9A', buttonBackgroundColor: '#AB47BC', buttonHoverBackgroundColor: '#E1BEE7', buttonPadding: '12px 18px', postBackgroundColor: '#F3E5F5', containerBackgroundColor: '#CE93D8', postBorderColor: '#BA68C8' },
-            { bodyBackgroundColor: '#F1F8E9', bodyColor: '#33691E', buttonBackgroundColor: '#8BC34A', buttonHoverBackgroundColor: '#DCEDC8', buttonPadding: '12px 18px', postBackgroundColor: '#F1F8E9', containerBackgroundColor: '#AED581', postBorderColor: '#C5E1A5' },
-            { bodyBackgroundColor: '#E8F5E9', bodyColor: '#2E7D32', buttonBackgroundColor: '#66BB6A', buttonHoverBackgroundColor: '#C8E6C9', buttonPadding: '12px 18px', postBackgroundColor: '#E8F5E9', containerBackgroundColor: '#A5D6A7', postBorderColor: '#81C784' },
-            { bodyBackgroundColor: '#FFFDE7', bodyColor: '#F57F17', buttonBackgroundColor: '#FFEB3B', buttonHoverBackgroundColor: '#FFF9C4', buttonPadding: '12px 18px', postBackgroundColor: '#FFFDE7', containerBackgroundColor: '#FFF59D', postBorderColor: '#FFEE58' },
-            { bodyBackgroundColor: '#E8EAF6', bodyColor: '#1A237E', buttonBackgroundColor: '#3F51B5', buttonHoverBackgroundColor: '#C5CAE9', buttonPadding: '12px 18px', postBackgroundColor: '#E8EAF6', containerBackgroundColor: '#9FA8DA', postBorderColor: '#7986CB' },
-            { bodyBackgroundColor: '#FBE9E7', bodyColor: '#BF360C', buttonBackgroundColor: '#FF5722', buttonHoverBackgroundColor: '#FFCCBC', buttonPadding: '12px 18px', postBackgroundColor: '#FBE9E7', containerBackgroundColor: '#FFAB91', postBorderColor: '#FF8A65' },
-            { bodyBackgroundColor: '#ECEFF1', bodyColor: '#263238', buttonBackgroundColor: '#78909C', buttonHoverBackgroundColor: '#CFD8DC', buttonPadding: '12px 18px', postBackgroundColor: '#ECEFF1', containerBackgroundColor: '#B0BEC5', postBorderColor: '#90A4AE' },
-            { bodyBackgroundColor: '#E1F5FE', bodyColor: '#01579B', buttonBackgroundColor: '#03A9F4', buttonHoverBackgroundColor: '#B3E5FC', buttonPadding: '12px 18px', postBackgroundColor: '#E1F5FE', containerBackgroundColor: '#81D4FA', postBorderColor: '#4FC3F7' },
-            { bodyBackgroundColor: '#F9FBE7', bodyColor: '#827717', buttonBackgroundColor: '#CDDC39', buttonHoverBackgroundColor: '#F0F4C3', buttonPadding: '12px 18px', postBackgroundColor: '#F9FBE7', containerBackgroundColor: '#E6EE9C', postBorderColor: '#DCE775' },
-            { bodyBackgroundColor: '#F3E5F5', bodyColor: '#4A148C', buttonBackgroundColor: '#9C27B0', buttonHoverBackgroundColor: '#E1BEE7', buttonPadding: '12px 18px', postBackgroundColor: '#F3E5F5', containerBackgroundColor: '#CE93D8', postBorderColor: '#BA68C8' },
-            { bodyBackgroundColor: '#E8F5E9', bodyColor: '#1B5E20', buttonBackgroundColor: '#4CAF50', buttonHoverBackgroundColor: '#C8E6C9', buttonPadding: '12px 18px', postBackgroundColor: '#E8F5E9', containerBackgroundColor: '#A5D6A7', postBorderColor: '#81C784' },
-            { bodyBackgroundColor: '#E0F7FA', bodyColor: '#004D40', buttonBackgroundColor: '#009688', buttonHoverBackgroundColor: '#B2DFDB', buttonPadding: '12px 18px', postBackgroundColor: '#E0F7FA', containerBackgroundColor: '#80CBC4', postBorderColor: '#4DB6AC' },
-            { bodyBackgroundColor: '#FFF3E0', bodyColor: '#E65100', buttonBackgroundColor: '#FF9800', buttonHoverBackgroundColor: '#FFE0B2', buttonPadding: '12px 18px', postBackgroundColor: '#FFF3E0', containerBackgroundColor: '#FFCC80', postBorderColor: '#FFB74D' },
-            { bodyBackgroundColor: '#E0F2F1', bodyColor: '#004D40', buttonBackgroundColor: '#26A69A', buttonHoverBackgroundColor: '#B2DFDB', buttonPadding: '12px 18px', postBackgroundColor: '#E0F2F1', containerBackgroundColor: '#80CBC4', postBorderColor: '#4DB6AC' },
-            { bodyBackgroundColor: '#FFEBEE', bodyColor: '#B71C1C', buttonBackgroundColor: '#F44336', buttonHoverBackgroundColor: '#FFCDD2', buttonPadding: '12px 18px', postBackgroundColor: '#FFEBEE', containerBackgroundColor: '#EF9A9A', postBorderColor: '#E57373' },
-            { bodyBackgroundColor: '#E0F7FA', bodyColor: '#006064', buttonBackgroundColor: '#00ACC1', buttonHoverBackgroundColor: '#B2EBF2', buttonPadding: '12px 18px', postBackgroundColor: '#E0F7FA', containerBackgroundColor: '#80DEEA', postBorderColor: '#4DD0E1' },
-            { bodyBackgroundColor: '#FCE4EC', bodyColor: '#880E4F', buttonBackgroundColor: '#EC407A', buttonHoverBackgroundColor: '#F8BBD0', buttonPadding: '12px 18px', postBackgroundColor: '#FCE4EC', containerBackgroundColor: '#F48FB1', postBorderColor: '#F06292' },
-            { bodyBackgroundColor: '#F1F8E9', bodyColor: '#33691E', buttonBackgroundColor: '#8BC34A', buttonHoverBackgroundColor: '#DCEDC8', buttonPadding: '12px 18px', postBackgroundColor: '#F1F8E9', containerBackgroundColor: '#AED581', postBorderColor: '#C5E1A5' },
-            { bodyBackgroundColor: '#E8EAF6', bodyColor: '#1A237E', buttonBackgroundColor: '#3F51B5', buttonHoverBackgroundColor: '#C5CAE9', buttonPadding: '12px 18px', postBackgroundColor: '#E8EAF6', containerBackgroundColor: '#9FA8DA', postBorderColor: '#7986CB' },
-            { bodyBackgroundColor: '#FFFDE7', bodyColor: '#F57F17', buttonBackgroundColor: '#FFEB3B', buttonHoverBackgroundColor: '#FFF9C4', buttonPadding: '12px 18px', postBackgroundColor: '#FFFDE7', containerBackgroundColor: '#FFF59D', postBorderColor: '#FFEE58' }
+            { bodyBackgroundColor: '#E1F5FE', bodyColor: '#01579B', buttonBackgroundColor: '#03A9F4', buttonHoverBackgroundColor: '#B3E5FC', buttonPadding: '12px 18px', postBackgroundColor: '#E1F5FE', containerBackgroundColor: '#B3E5FC', postBorderColor: '#81D4FA' }
         ];
 
-        let currentThemeIndex = localStorage.getItem('themeIndex') || 0;
+        let currentThemeIndex = parseInt(localStorage.getItem('themeIndex') || '0');
 
         function applyTheme(index) {
             const theme = strongThemes[index];
@@ -436,12 +396,12 @@
             document.documentElement.style.setProperty('--post-bg-color', theme.postBackgroundColor);
             document.documentElement.style.setProperty('--container-bg-color', theme.containerBackgroundColor);
             document.documentElement.style.setProperty('--post-border-color', theme.postBorderColor);
-            localStorage.setItem('themeIndex', index);
         }
 
         function toggleTheme() {
-            currentThemeIndex = (parseInt(currentThemeIndex) + 1) % strongThemes.length;
+            currentThemeIndex = (currentThemeIndex + 1) % strongThemes.length;
             applyTheme(currentThemeIndex);
+            localStorage.setItem('themeIndex', currentThemeIndex);
         }
 
         document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
@@ -460,14 +420,13 @@
             let progress = 0;
             const interval = setInterval(() => {
                 if (progress < 100) {
-                    progress += 10;
+                    progress += 5;
                     progressBar.style.width = progress + '%';
                     loadingPercentage.textContent = progress + '%';
                 } else {
                     clearInterval(interval);
-                    hideLoadingScreen();
                 }
-            }, 150);
+            }, 100);
         }
 
         function hideLoadingScreen() {
@@ -478,8 +437,12 @@
             }, 500);
         }
 
-        window.addEventListener('load', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             showLoadingScreen();
+        });
+
+        window.addEventListener('load', () => {
+            hideLoadingScreen();
         });
 
         const likeButton = document.querySelector('.like-button');
@@ -489,7 +452,9 @@
         likeButton.addEventListener('click', () => {
             likeButton.classList.toggle('liked');
             likeModal.style.display = 'flex';
-        });closeModal.addEventListener('click', () => {
+        });
+
+        closeModal.addEventListener('click', () => {
             likeModal.style.display = 'none';
         });
 
@@ -527,4 +492,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
