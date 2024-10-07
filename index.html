@@ -23,6 +23,33 @@
             color: var(--body-color);
             transition: background 0.3s, color 0.3s;
         }
+        header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .study-task-name {
+            background: linear-gradient(270deg, #ff6ec4, #7873f5, #4adede, #ff6ec4);
+            background-size: 800% 800%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 5s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         #loading-screen {
             position: fixed;
             top: 0;
@@ -62,33 +89,6 @@
             font-size: 1.2em;
             color: #fff;
         }
-        header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        h1 img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        .study-task-name {
-            background: linear-gradient(270deg, #ff6ec4, #7873f5, #4adede, #ff6ec4);
-            background-size: 800% 800%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient-animation 5s ease infinite;
-        }
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -97,27 +97,37 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        .post {
-            margin: 20px 0;
-            padding: 15px;
+        .carousel {
+            margin-top: 20px;
+        }
+        .carousel-item {
+            padding: 10px;
+            background: var(--post-bg-color);
             border: 1px solid var(--post-border-color);
             border-radius: 10px;
-            background: var(--post-bg-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .video-responsive {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
+        .carousel-item h3 {
+            margin-bottom: 10px;
+            color: var(--body-color);
         }
-        .video-responsive iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .carousel-item ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .carousel-item ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .carousel-item ul li img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .carousel-item ul li span {
+            font-weight: bold;
         }
         .bottom-container {
             display: flex;
@@ -240,6 +250,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 </head>
 <body>
     <div id="loading-screen">
@@ -258,9 +270,36 @@
         </button>
     </header>
     <div class="container">
-        <div class="post">
-            <div class="video-responsive">
-                <iframe src="https://www.youtube.com/embed/s4a4Z3Svljg" frameborder="0" allowfullscreen></iframe>
+        <div class="carousel">
+            <div class="carousel-item">
+                <h3>Candidatos no Segundo Turno:</h3>
+                <ul>
+                    <li>
+                        <img src="https://resultados.tse.jus.br/oficial/ele2024/619/fotos/ce/60002029263.jpeg" alt="André Fernandes">
+                        <span>ANDRÉ FERNANDES (PL – 22)</span>
+                    </li>
+                    <li>
+                        <img src="https://resultados.tse.jus.br/oficial/ele2024/619/fotos/ce/60002129518.jpeg" alt="Evandro Leitão">
+                        <span>EVANDRO LEITÃO (PT – 13)</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="carousel-item">
+                <h3>Candidatos Eliminados:</h3>
+                <ul>
+                    <li>
+                        <img src="https://resultados.tse.jus.br/oficial/ele2024/619/fotos/ce/60002029261.jpeg" alt="José Sarto">
+                        <span>JOSÉ SARTO (PDT – 12)</span>
+                    </li>
+                    <li>
+                        <img src="https://resultados.tse.jus.br/oficial/ele2024/619/fotos/ce/60001939602.jpeg" alt="Capitão Wagner">
+                        <span>CAPITÃO WAGNER (UNIÃO – 44)</span>
+                    </li>
+                    <li>
+                        <img src="https://resultados.tse.jus.br/oficial/ele2024/619/fotos/ce/60002029283.jpeg" alt="Eduardo Girão">
+                        <span>EDUARDO GIRÃO (NOVO – 30)</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="bottom-container">
@@ -318,7 +357,20 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                arrows: true,
+            });
+        });
+
         const strongThemes = [
             { bodyBackgroundColor: '#000000', bodyColor: '#FFFFFF', buttonBackgroundColor: '#333333', buttonHoverBackgroundColor: '#555555', buttonPadding: '12px 18px', postBackgroundColor: '#444444', containerBackgroundColor: '#666666', postBorderColor: '#333333' },
             { bodyBackgroundColor: '#FFEBEE', bodyColor: '#B71C1C', buttonBackgroundColor: '#D32F2F', buttonHoverBackgroundColor: '#FFCDD2', buttonPadding: '12px 18px', postBackgroundColor: '#FFEBEE', containerBackgroundColor: '#FFCDD2', postBorderColor: '#EF9A9A' },
@@ -393,7 +445,7 @@
         }
 
         document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
-        
+
         applyTheme(currentThemeIndex);
 
         function showLoadingScreen() {
@@ -437,9 +489,7 @@
         likeButton.addEventListener('click', () => {
             likeButton.classList.toggle('liked');
             likeModal.style.display = 'flex';
-        });
-
-        closeModal.addEventListener('click', () => {
+        });closeModal.addEventListener('click', () => {
             likeModal.style.display = 'none';
         });
 
@@ -477,4 +527,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
