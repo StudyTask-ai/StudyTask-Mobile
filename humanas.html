@@ -127,7 +127,8 @@
             display: flex;
             align-items: center;
             padding: var(--button-padding);
-            width: auto;
+            width: 150px; /* Define a mesma largura para todos os botões */
+            justify-content: center; /* Centraliza o conteúdo do botão */
         }
         .like-button img, .share-button img {
             height: 20px;
@@ -216,7 +217,7 @@
         @media (max-width: 600px) {
             .like-button, .share-button {
                 font-size: 1.2em;
-                width: auto;
+                width: 100%; /* Ajusta para 100% da largura disponível em telas menores */
                 justify-content: center;
             }
             .buttons {
@@ -246,6 +247,14 @@
             <p>Sejam todos muito bem-vindos ao fascinante universo das Ciências Humanas! Aqui, no 2° ano H do Ensino Médio, vamos embarcar em uma jornada que explora a complexidade da sociedade, da cultura, das relações humanas e do comportamento ao longo da história.</p>
         </div>
         <div class="bottom-container">
+            <div class="buttons">
+                <button class="like-button">
+                    <img src="https://cdn-icons-png.flaticon.com/128/833/833472.png" alt="Like"> Curtir
+                </button>
+                <button class="share-button">
+                    <img src="https://cdn-icons-png.flaticon.com/128/833/833314.png" alt="Share"> Compartilhar
+                </button>
+            </div>
             <div class="subjects">
                 <div class="subject" onclick="window.location.href='https://studytask-ai.github.io/Cidadania-Padr-es-de-Beleza-07-10/'">
                     <img src="https://cdn-icons-png.flaticon.com/128/1357/1357616.png" alt="Padrões de Beleza">
