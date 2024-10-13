@@ -19,11 +19,21 @@
         }
         .container {
             background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
             text-align: center;
             max-width: 600px;
             color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra ao redor da caixa */
+            opacity: 0; /* Inicialmente invisível */
+            transform: translateY(20px); /* Deslocamento inicial para animação */
+            animation: fadeIn 1s forwards; /* Animação de entrada */
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1; /* Tornar visível */
+                transform: translateY(0); /* Retornar à posição original */
+            }
         }
         h1 {
             font-size: 3em;
@@ -37,12 +47,16 @@
         }
         p {
             font-size: 1.2em;
-            margin: 20px 0;
+            margin: 10px 0;
             line-height: 1.5; /* Aumenta o espaçamento entre linhas */
+            transition: color 0.3s; /* Transição suave para mudança de cor */
+        }
+        p:hover {
+            color: #f0c14b; /* Cor ao passar o mouse */
         }
         .icon {
             width: 100px; /* Ajuste o tamanho do ícone conforme necessário */
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -53,10 +67,13 @@
         <h1>StudyTask</h1>
         <h2>4° Bimestre</h2>
         <p>
-            Informamos que, infelizmente, não temos autorização para divulgar as atividades de matemática do Professor Bosco referentes ao quarto bimestre. No entanto, todas as demais atividades estão disponíveis para consulta. As aulas de matemática são realizadas todas as segundas e terças-feiras. Para acompanhar as atividades, solicitamos que você esteja atento(a) às informações divulgadas no grupo da escola pelo WhatsApp.
+            Informamos que, infelizmente, não temos autorização para divulgar as atividades de matemática do Professor Bosco referentes ao quarto bimestre.
         </p>
         <p>
-            Para que as atividades possam ser publicadas, o StudyTask precisa obter a autorização dos professores, a fim de garantir que todas as diretrizes do Google e as normas de nossa plataforma sejam respeitadas.
+            No entanto, todas as demais atividades estão disponíveis para consulta. As aulas de matemática são realizadas todas as segundas e terças-feiras. 
+        </p>
+        <p>
+            Para acompanhar as atividades, solicitamos que você esteja atento(a) às informações divulgadas no grupo da escola pelo WhatsApp.
         </p>
     </div>
 
