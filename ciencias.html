@@ -127,7 +127,8 @@
             display: flex;
             align-items: center;
             padding: var(--button-padding);
-            width: auto;
+            width: 150px;
+            justify-content: center;
         }
         .like-button img, .share-button img {
             height: 20px;
@@ -143,6 +144,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-transform: uppercase;
             font-weight: bold;
             font-size: 14px;
@@ -216,11 +218,14 @@
         @media (max-width: 600px) {
             .like-button, .share-button {
                 font-size: 1.2em;
-                width: auto;
+                width: 100%;
                 justify-content: center;
             }
             .buttons {
                 flex-wrap: wrap;
+            }
+            .subjects {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -255,10 +260,15 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/929/929468.png" alt="Compartilhar">
                     Compartilhar
                 </button>
-                </div>
+            </div>
+            <div class="subjects">
                 <div class="subject" onclick="window.location.href='https://studytask-ai.github.io/09-10-Sistema-circulat-rio-Ci-ncias-da-Natureza-/'">
-                    <img src="https://cdn-icons-png.flaticon.com/128/3389/3389081.png" alt="Português IV Bimestre">
-                    SISTEMA CIRCULATÓRIO 9/10
+                    <img src="https://cdn-icons-png.flaticon.com/128/3389/3389081.png" alt="Sistemas Circulatório">
+                    Sistemas Circulatório Continuação 9/10
+                </div>
+                <div class="subject" onclick="window.location.href='https://studytask-ai.github.io/CI-NCIAS-DA-NATUREZA-20-09/'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3389/3389081.png" alt="Sistemas Circulatório">
+                    Sistema Circulatório 20/09
                 </div>
             </div>
         </div>
