@@ -62,13 +62,15 @@
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(180deg, #000 0%, #333 100%);
             opacity: 1;
             transition: opacity 0.5s;
         }
         #loading-icon {
             width: 120px;
             height: 120px;
+            background-image: url('https://raw.githubusercontent.com/StudyTask-ai/StudyTask-Mobile/refs/heads/main/1000048199-unscreen.gif');
+            background-size: cover;
         }
         #progress-bar {
             width: 80%;
@@ -122,7 +124,8 @@
             display: flex;
             justify-content: center;
             margin-bottom: 10px;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
+            width: 100%;
         }
         .like-button, .share-button {
             background: var(--button-bg-color);
@@ -136,7 +139,8 @@
             display: flex;
             align-items: center;
             padding: var(--button-padding);
-            width: auto;
+            flex-grow: 1;
+            justify-content: center;
         }
         .like-button img, .share-button img {
             height: 20px;
@@ -238,7 +242,7 @@
 </head>
 <body>
     <div id="loading-screen">
-        <img id="loading-icon" src="https://raw.githubusercontent.com/StudyTask-ai/-DE-IMAGENS/refs/heads/main/1000020773-unscreen.gif" alt="Carregando">
+        <div id="loading-icon"></div>
         <div id="progress-bar"><span></span></div>
         <div id="loading-percentage">0%</div>
     </div>
