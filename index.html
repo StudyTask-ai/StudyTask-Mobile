@@ -22,7 +22,7 @@
             padding: 0;
             background-color: var(--body-bg-color);
             color: var(--body-color);
-            overflow-x: hidden; /* Evita o movimento horizontal */
+            overflow-x: hidden;
         }
         header {
             padding: 20px;
@@ -62,7 +62,7 @@
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
-            background: linear-gradient(180deg, #000 0%, #333 100%);
+            background: linear-gradient(180deg, #ffffff, #4adede 70%);
             opacity: 1;
             transition: opacity 0.5s;
         }
@@ -74,18 +74,20 @@
         }
         #progress-bar {
             width: 80%;
-            height: 4px;
+            height: 20px;
             background-color: #ddd;
-            border-radius: 2px;
+            border-radius: 10px;
             overflow: hidden;
             margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
         #progress-bar span {
             display: block;
             height: 100%;
-            background-color: #8533f1;
+            background: linear-gradient(90deg, #8533f1, #7209b7);
             width: 0;
             transition: width 0.5s;
+            border-radius: 10px;
         }
         #loading-percentage {
             margin-top: 10px;
@@ -245,6 +247,7 @@
         <div id="loading-icon"></div>
         <div id="progress-bar"><span></span></div>
         <div id="loading-percentage">0%</div>
+        <div id="study-quote"></div>
     </div>
 
     <header>
@@ -373,10 +376,31 @@
             const loadingScreen = document.getElementById('loading-screen');
             const progressBar = document.querySelector('#progress-bar span');
             const loadingPercentage = document.getElementById('loading-percentage');
+            const studyQuote = document.getElementById('study-quote');
+
+            const quotes = [
+                "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
+                "O único lugar onde o sucesso vem antes do trabalho é no dicionário.",
+                "Aprender nunca esgota a mente.",
+                "A educação é a arma mais poderosa que você pode usar para mudar o mundo. - Nelson Mandela",
+                "O futuro pertence àqueles que acreditam na beleza de seus sonhos.",
+                "A persistência é o caminho do êxito.",
+                "A única maneira de fazer um excelente trabalho é amar o que você faz.",
+                "Sonhe grande e ouse falhar.",
+                "Você nunca é velho demais para traçar outro objetivo ou sonhar um novo sonho.",
+                "O aprendizado é um tesouro que seguirá seu dono por toda parte.",
+                "A única coisa que interfere com meu aprendizado é a minha educação. - Albert Einstein",
+                "O que sabemos é uma gota; o que ignoramos é um oceano. - Isaac Newton"
+            ];
+
+            function chooseRandomQuote() {
+                return quotes[Math.floor(Math.random() * quotes.length)];
+            }
 
             loadingScreen.style.display = 'flex';
             loadingScreen.style.opacity = '1';
             progressBar.style.width = '0%';
+            studyQuote.textContent = chooseRandomQuote();
 
             let progress = 0;
             const interval = setInterval(() => {
