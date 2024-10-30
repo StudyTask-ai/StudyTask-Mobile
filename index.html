@@ -22,7 +22,6 @@
             padding: 0;
             background-color: var(--body-bg-color);
             color: var(--body-color);
-            overflow-x: hidden;
         }
         header {
             padding: 20px;
@@ -62,32 +61,28 @@
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
-            background: linear-gradient(180deg, #ffffff, #4adede 70%);
+            background-color: rgba(0, 0, 0, 0.7);
             opacity: 1;
             transition: opacity 0.5s;
         }
         #loading-icon {
             width: 120px;
             height: 120px;
-            background-image: url('https://raw.githubusercontent.com/StudyTask-ai/StudyTask-Mobile/refs/heads/main/1000048199-unscreen.gif');
-            background-size: cover;
         }
         #progress-bar {
             width: 80%;
-            height: 20px;
+            height: 4px;
             background-color: #ddd;
-            border-radius: 10px;
+            border-radius: 2px;
             overflow: hidden;
             margin-top: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
         #progress-bar span {
             display: block;
             height: 100%;
-            background: linear-gradient(90deg, #8533f1, #7209b7);
+            background-color: #8533f1;
             width: 0;
             transition: width 0.5s;
-            border-radius: 10px;
         }
         #loading-percentage {
             margin-top: 10px;
@@ -116,6 +111,17 @@
             margin-bottom: 10px;
             color: var(--body-color);
         }
+        .carousel-item ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .carousel-item ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
         .bottom-container {
             display: flex;
             flex-direction: column;
@@ -126,8 +132,7 @@
             display: flex;
             justify-content: center;
             margin-bottom: 10px;
-            flex-wrap: wrap;
-            width: 100%;
+            flex-wrap: nowrap;
         }
         .like-button, .share-button {
             background: var(--button-bg-color);
@@ -141,8 +146,7 @@
             display: flex;
             align-items: center;
             padding: var(--button-padding);
-            flex-grow: 1;
-            justify-content: center;
+            width: auto;
         }
         .like-button img, .share-button img {
             height: 20px;
@@ -238,16 +242,142 @@
                 flex-wrap: wrap;
             }
         }
+        
+        /* Botão com estilo de animação */
+        .btn-80,
+        .btn-80 *,
+        .btn-80 :after,
+        .btn-80 :before,
+        .btn-80:after,
+        .btn-80:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+        .btn-80 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+            padding: 0;
+        }
+        .btn-80:disabled {
+            cursor: default;
+        }
+        .btn-80:-moz-focusring {
+            outline: auto;
+        }
+        .btn-80 svg {
+            display: block;
+            vertical-align: middle;
+        }
+        .btn-80 [hidden] {
+            display: none;
+        }
+        .btn-80 {
+            border: 2px solid;
+            border-radius: 999px;
+            box-sizing: border-box;
+            display: block;
+            overflow: hidden;
+            padding: 1.2rem 3rem;
+            position: relative;
+            text-transform: uppercase;
+        }
+        .btn-80 span {
+            font-weight: 900;
+            mix-blend-mode: difference;
+        }
+        .btn-80:before {
+            background: #fff;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+        }
+        .btn-80:hover:before {
+            -webkit-animation: progress-bar 1.2s;
+            animation: progress-bar 1.2s;
+        }
+        @-webkit-keyframes progress-bar {
+            0% {
+                opacity: 1;
+                width: 0;
+            }
+            10% {
+                opacity: 1;
+                width: 15%;
+            }
+            25% {
+                opacity: 1;
+                width: 25%;
+            }
+            40% {
+                opacity: 1;
+                width: 35%;
+            }
+            55% {
+                opacity: 1;
+                width: 75%;
+            }
+            60% {
+                opacity: 1;
+                width: 100%;
+            }
+            to {
+                opacity: 0;
+                width: 100%;
+            }
+        }
+        @keyframes progress-bar {
+            0% {
+                opacity: 1;
+                width: 0;
+            }
+            10% {
+                opacity: 1;
+                width: 15%;
+            }
+            25% {
+                opacity: 1;
+                width: 25%;
+            }
+            40% {
+                opacity: 1;
+                width: 35%;
+            }
+            55% {
+                opacity: 1;
+                width: 75%;
+            }
+            60% {
+                opacity: 1;
+                width: 100%;
+            }
+            to {
+                opacity: 0;
+                width: 100%;
+            }
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 </head>
 <body>
     <div id="loading-screen">
-        <div id="loading-icon"></div>
+        <img id="loading-icon" src="https://raw.githubusercontent.com/StudyTask-ai/-DE-IMAGENS/refs/heads/main/1000020773-unscreen.gif" alt="Carregando">
         <div id="progress-bar"><span></span></div>
         <div id="loading-percentage">0%</div>
-        <div id="study-quote"></div>
     </div>
 
     <header>
@@ -262,8 +392,22 @@
     <div class="container">
         <div class="carousel">
             <div class="carousel-item">
-                <h3>Frase de Estudo:</h3>
-                <p>"A educação é a arma mais poderosa que você pode usar para mudar o mundo." - Nelson Mandela</p>
+                <h3>Frases de Motivação para Estudos:</h3>
+                <ul>
+                    <li>"O sucesso é a soma de pequenos esforços repetidos dia após dia."</li>
+                    <li>"A educação é a arma mais poderosa que você pode usar para mudar o mundo."</li>
+                    <li>"Quanto mais eu me preparo, mais sorte eu pareço ter."</li>
+                    <li>"A chave para o sucesso é começar antes de estar pronto."</li>
+                </ul>
+            </div>
+            <div class="carousel-item">
+                <h3>Dicas para Estudo Eficiente:</h3>
+                <ul>
+                    <li>"Estude sempre no mesmo lugar para criar um hábito."</li>
+                    <li>"Faça pausas regulares para melhorar a concentração."</li>
+                    <li>"Use mapas mentais para organizar suas ideias."</li>
+                    <li>"Ensine o que aprendeu para fixar melhor o conteúdo."</li>
+                </ul>
             </div>
         </div>
         <div class="bottom-container">
@@ -376,31 +520,10 @@
             const loadingScreen = document.getElementById('loading-screen');
             const progressBar = document.querySelector('#progress-bar span');
             const loadingPercentage = document.getElementById('loading-percentage');
-            const studyQuote = document.getElementById('study-quote');
-
-            const quotes = [
-                "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
-                "O único lugar onde o sucesso vem antes do trabalho é no dicionário.",
-                "Aprender nunca esgota a mente.",
-                "A educação é a arma mais poderosa que você pode usar para mudar o mundo. - Nelson Mandela",
-                "O futuro pertence àqueles que acreditam na beleza de seus sonhos.",
-                "A persistência é o caminho do êxito.",
-                "A única maneira de fazer um excelente trabalho é amar o que você faz.",
-                "Sonhe grande e ouse falhar.",
-                "Você nunca é velho demais para traçar outro objetivo ou sonhar um novo sonho.",
-                "O aprendizado é um tesouro que seguirá seu dono por toda parte.",
-                "A única coisa que interfere com meu aprendizado é a minha educação. - Albert Einstein",
-                "O que sabemos é uma gota; o que ignoramos é um oceano. - Isaac Newton"
-            ];
-
-            function chooseRandomQuote() {
-                return quotes[Math.floor(Math.random() * quotes.length)];
-            }
 
             loadingScreen.style.display = 'flex';
             loadingScreen.style.opacity = '1';
             progressBar.style.width = '0%';
-            studyQuote.textContent = chooseRandomQuote();
 
             let progress = 0;
             const interval = setInterval(() => {
